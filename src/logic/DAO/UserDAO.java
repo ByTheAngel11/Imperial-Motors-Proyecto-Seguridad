@@ -18,9 +18,8 @@ public class UserDAO {
     private static final String SQL_SELECT_ALL = "SELECT * FROM user";
 
     public boolean insertUser(UserDTO user) throws SQLException, IOException {
-        try (ConnectionDataBase connectionDataBase = new ConnectionDataBase()) {
-            Connection connection = connectionDataBase.connectDB();
-            PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_INSERT)) {
             statement.setString(1, user.getPersonnelNumber());
             statement.setLong(2, user.getAccountId());
             statement.setString(3, user.getUsername());
@@ -34,9 +33,8 @@ public class UserDAO {
     }
 
     public boolean updateUser(UserDTO user) throws SQLException, IOException {
-        try (ConnectionDataBase connectionDataBase = new ConnectionDataBase()) {
-            Connection connection = connectionDataBase.connectDB();
-            PreparedStatement statement = connection.prepareStatement(SQL_UPDATE);
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_UPDATE)) {
             statement.setLong(1, user.getAccountId());
             statement.setString(2, user.getUsername());
             statement.setString(3, user.getFullName());
@@ -50,9 +48,8 @@ public class UserDAO {
     }
 
     public boolean deleteUser(String personnelNumber) throws SQLException, IOException {
-        try (ConnectionDataBase connectionDataBase = new ConnectionDataBase()) {
-            Connection connection = connectionDataBase.connectDB();
-            PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE)) {
             statement.setString(1, personnelNumber);
             return statement.executeUpdate() > 0;
         }
@@ -60,9 +57,8 @@ public class UserDAO {
 
     public UserDTO findUserByPersonnelNumber(String personnelNumber) throws SQLException, IOException {
         UserDTO user = null;
-        try (ConnectionDataBase connectionDataBase = new ConnectionDataBase()) {
-            Connection connection = connectionDataBase.connectDB();
-            PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_ID);
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_ID)) {
             statement.setString(1, personnelNumber);
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
@@ -75,10 +71,9 @@ public class UserDAO {
 
     public List<UserDTO> getAllUsers() throws SQLException, IOException {
         List<UserDTO> users = new ArrayList<>();
-        try (ConnectionDataBase connectionDataBase = new ConnectionDataBase()) {
-            Connection connection = connectionDataBase.connectDB();
-            PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL);
-            ResultSet rs = statement.executeQuery();
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL);
+             ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 users.add(mapResultSetToUserDTO(rs));
             }

@@ -7,26 +7,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Conexión mínima vía DriverManager (sin pool).
- * Usa ConfigLoader para obtener URL/usuario/contraseña.
- */
 public final class ConnectionDataBase {
     private static final Logger log = LogManager.getLogger(ConnectionDataBase.class);
 
-    private ConnectionDataBase() {}
+    public ConnectionDataBase() {}
 
-    /** Abre una nueva conexión. Cierra siempre en tus DAOs (try-with-resources). */
     public static Connection getConnection() throws SQLException {
         String url  = ConfigLoader.getDbUrl();
         String user = ConfigLoader.getDbUser();
         String pass = ConfigLoader.getDbPass();
-        // No logueamos la contraseña
         log.debug("Abriendo conexión a {}", sanitiseUrl(url));
         return DriverManager.getConnection(url, user, pass);
     }
 
-    /** Verifica reachability con isValid(timeoutSegundos). */
     public static boolean ping(int timeoutSeconds) {
         try (Connection c = getConnection()) {
             boolean ok = c.isValid(Math.max(1, timeoutSeconds));

@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/AccountDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataaccess/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataaccess/ConfigLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataaccess/ConnectionDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataaccess/ConnectionDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/styles/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/LoginView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -62,8 +68,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
-        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.28293.39" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.28293.39" />
       </set>
     </attachedChunks>
   </component>
@@ -77,6 +83,7 @@
       <workItem from="1759440954486" duration="640000" />
       <workItem from="1759533818134" duration="54000" />
       <workItem from="1762136718358" duration="1579000" />
+      <workItem from="1762144706901" duration="627000" />
     </task>
     <servers />
   </component>
