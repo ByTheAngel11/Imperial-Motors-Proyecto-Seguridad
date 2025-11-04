@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataaccess/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataaccess/ConfigLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataaccess/ConnectionDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataaccess/ConnectionDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/LoginView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +15,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -42,6 +36,9 @@
     &quot;accountId&quot;: &quot;5d081558-e410-477a-b193-4e439519074e&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/resources/org/example/imperialmotors/config.properties" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -52,6 +49,10 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.GenerateHashes.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -62,9 +63,54 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33678162&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\dashboard" />
+      <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\login" />
+      <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\views" />
+      <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="GenerateHashes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="utilities.GenerateHashes" />
+      <module name="Imperial-Motors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="Imperial-Motors" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\manit\Downloads\javafx-sdk-24.0.1\javafx-sdk-24.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GenerateHashes" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -83,7 +129,12 @@
       <workItem from="1759440954486" duration="640000" />
       <workItem from="1759533818134" duration="54000" />
       <workItem from="1762136718358" duration="1579000" />
-      <workItem from="1762144706901" duration="627000" />
+      <workItem from="1762144706901" duration="1641000" />
+      <workItem from="1762146373664" duration="1302000" />
+      <workItem from="1762203770224" duration="4437000" />
+      <workItem from="1762211873123" duration="6065000" />
+      <workItem from="1762223596410" duration="4324000" />
+      <workItem from="1762472707951" duration="39000" />
     </task>
     <servers />
   </component>

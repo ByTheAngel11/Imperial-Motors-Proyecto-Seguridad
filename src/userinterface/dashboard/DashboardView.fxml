@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.dashboard.DashboardController"
+            prefWidth="1280" prefHeight="800"
+            stylesheets="@/styles/dashboard.css">
+
+    <!-- ============ SIDEBAR IZQUIERDO ============ -->
+    <left>
+        <VBox prefWidth="240"
+              styleClass="sidebar">
+
+            <!-- Logo / Encabezado -->
+            <VBox spacing="8"
+                  alignment="CENTER_LEFT"
+                  styleClass="sidebar-header">
+                <padding>
+                    <Insets top="16" right="16" bottom="16" left="16"/>
+                </padding>
+
+                <Label text="Imperial Motors"
+                       styleClass="sidebar-title"/>
+                <Label text="Sistema de Gestión"
+                       styleClass="sidebar-subtitle"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Navegación -->
+            <VBox spacing="4"
+                  styleClass="nav-container">
+                <padding>
+                    <Insets top="8" right="8" bottom="8" left="8"/>
+                </padding>
+
+                <Button fx:id="btnDashboard"
+                        text="Dashboard"
+                        onAction="#onReports"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnUsuarios"
+                        text="Usuarios"
+                        onAction="#onUsers"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnClientes"
+                        text="Clientes"
+                        onAction="#onClients"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnInventario"
+                        text="Inventario"
+                        onAction="#onInventory"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnVentas"
+                        text="Ventas"
+                        onAction="#onSales"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnProveedores"
+                        text="Proveedores"
+                        onAction="#onProviders"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnReportes"
+                        text="Reportes"
+                        onAction="#onReports"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Separator/>
+
+                <Button fx:id="btnConfiguracion"
+                        text="Configuración"
+                        onAction="#onConfiguration"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Button fx:id="btnAcercaDe"
+                        text="Acerca de"
+                        onAction="#onAbout"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
+
+                <Pane VBox.vgrow="ALWAYS"/>
+
+                <Button fx:id="btnCerrarSesion"
+                        text="Cerrar sesión"
+                        onAction="#onLogout"
+                        styleClass="btn-logout"
+                        maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- ============ BARRA SUPERIOR ============ -->
+    <top>
+        <BorderPane styleClass="topbar">
+            <left>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets left="24" top="0" right="0" bottom="0"/>
+                    </padding>
+                    <Label text="☰" styleClass="topbar-menu-icon"/>
+                    <VBox spacing="2">
+                        <Label text="Admin Usuario"
+                               styleClass="topbar-username"/>
+                        <Label text="Administrador"
+                               styleClass="topbar-role"/>
+                    </VBox>
+                </HBox>
+            </left>
+        </BorderPane>
+    </top>
+
+    <!-- ============ ÁREA CENTRAL ============ -->
+    <center>
+        <!-- Aquí cargaremos dinámicamente las vistas (usuarios, clientes, etc.) -->
+        <AnchorPane fx:id="contentArea"
+                    style="-fx-background-color: #F3F4F6;"
+                    prefWidth="1040" prefHeight="800"/>
+    </center>
+</BorderPane>

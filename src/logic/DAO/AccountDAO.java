@@ -16,6 +16,7 @@ public class AccountDAO {
     private static final String SQL_DELETE = "DELETE FROM account WHERE account_id = ?";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM account WHERE account_id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM account";
+    private static final String SQL_SELECT_BY_EMAIL = "SELECT * FROM account WHERE email = ? AND deleted_at IS NULL";
 
     public boolean insertAccount(AccountDTO account) throws SQLException, IOException {
         try (Connection connection = ConnectionDataBase.getConnection();
@@ -84,6 +85,21 @@ public class AccountDAO {
             }
         }
         return accounts;
+    }
+
+    public AccountDTO findAccountByEmail(String email) throws SQLException, IOException {
+        AccountDTO account = null;
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_EMAIL)) {
+
+            statement.setString(1, email);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    account = mapResultSetToAccountDTO(rs);
+                }
+            }
+        }
+        return account;
     }
 
     private AccountDTO mapResultSetToAccountDTO(ResultSet rs) throws SQLException {
