@@ -11,7 +11,7 @@ import java.util.Properties;
 public final class ConfigLoader {
     private static final Logger log = LogManager.getLogger(ConfigLoader.class);
 
-    private static final String BASE_FILE = "/db.properties";
+    private static final String BASE_FILE = "/org/example/imperialmotors/config.properties";
     private static final String ENV_KEY   = "app.env";  // si existe, buscar db-<env>.properties
     private static final Properties PROPS = new Properties();
 
@@ -28,7 +28,7 @@ public final class ConfigLoader {
 
         String env = PROPS.getProperty(ENV_KEY, System.getProperty(ENV_KEY, System.getenv("APP_ENV")));
         if (env != null && !env.isBlank()) {
-            String envFile = "/db-" + env.trim() + ".properties";
+            String envFile = "/config-" + env.trim() + ".properties";
             loadFromClasspath(envFile, false);
         }
 

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.login.LoginController"
+            prefWidth="1280" prefHeight="800"
+            stylesheets="@/resources/styles/login.css">
+
+    <!-- Fondo completo -->
+    <ImageView fitWidth="1280" fitHeight="800" preserveRatio="false">
+        <image>
+            <Image url="@/resources/images/bg-cars.png" />
+        </image>
+    </ImageView>
+
+    <!-- Capa oscura sobre el fondo -->
+    <Rectangle layoutX="0" layoutY="0"
+               width="1280" height="800"
+               fill="#000000" opacity="0.45"/>
+
+    <!-- TARJETA (parte blanca) centrada con coordenadas -->
+    <!-- Tamaño: 520x620, centrada en 1280x800 -->
+    <AnchorPane layoutX="380" layoutY="90"
+                prefWidth="520" prefHeight="620"
+                styleClass="card">
+
+        <!-- Logo IM con punto rojo -->
+        <StackPane layoutX="232" layoutY="40"
+                   prefWidth="56" prefHeight="56">
+
+            <!-- Fondo cuadrado con esquinas redondeadas -->
+            <Rectangle width="44" height="44"
+                       arcWidth="12" arcHeight="12"
+                       fill="#0F172A"/>
+
+            <!-- Texto IM -->
+            <Label text="IM" textFill="WHITE">
+                <font>
+                    <Font name="Poppins SemiBold" size="18"/>
+                </font>
+            </Label>
+
+            <!-- Punto rojo de notificación -->
+            <Circle radius="6" fill="#EF4444" StackPane.alignment="TOP_RIGHT">
+                <StackPane.margin>
+                    <Insets top="-4" right="-4"/>
+                </StackPane.margin>
+            </Circle>
+        </StackPane>
+
+        <!-- Título y subtítulo -->
+        <Label layoutX="190" layoutY="120"
+               text="Imperial Motors"
+               styleClass="title"/>
+
+        <Label layoutX="150" layoutY="145"
+               text="Ingresa tus credenciales para continuar"
+               styleClass="subtitle"/>
+
+        <!-- Etiqueta: Correo -->
+        <Label layoutX="80" layoutY="190"
+               text="Correo electrónico"/>
+
+        <!-- Campo correo -->
+        <TextField fx:id="txtEmail"
+                   layoutX="80" layoutY="215"
+                   prefWidth="360" prefHeight="40"
+                   promptText="tu@email.com">
+            <tooltip>
+                <Tooltip text="Ingresa un correo válido"/>
+            </tooltip>
+        </TextField>
+
+        <!-- Etiqueta: Contraseña -->
+        <Label layoutX="80" layoutY="270"
+               text="Contraseña"/>
+
+        <!-- Campo contraseña -->
+        <PasswordField fx:id="txtPassword"
+                       layoutX="80" layoutY="295"
+                       prefWidth="360" prefHeight="40"
+                       promptText="••••••••"
+                       onAction="#onLogin"/>
+
+        <!-- Botón Iniciar sesión -->
+        <Button fx:id="btnLogin"
+                layoutX="80" layoutY="350"
+                prefWidth="360" prefHeight="44"
+                text="Iniciar sesión"
+                styleClass="primary"
+                defaultButton="true"
+                onAction="#onLogin"/>
+
+        <!-- ¿Olvidaste tu contraseña? -->
+        <Hyperlink fx:id="lnkForgot"
+                   layoutX="195" layoutY="405"
+                   text="¿Olvidaste tu contraseña?"/>
+
+        <!-- Separador -->
+        <Separator layoutX="80" layoutY="445"
+                   prefWidth="360"/>
+
+        <!-- Credenciales de prueba -->
+        <Label layoutX="200" layoutY="470"
+               text="Credenciales de prueba:"
+               styleClass="small"/>
+
+        <!-- Admin (envuelto si es necesario) -->
+        <Label layoutX="80" layoutY="495"
+               prefWidth="360"
+               wrapText="true"
+               text="Admin: admin@imperialmotors.com  /  admin123"
+                alignment="CENTER"
+               styleClass="muted"/>
+
+        <!-- Vendedor -->
+        <Label layoutX="80" layoutY="525"
+               prefWidth="360"
+               wrapText="true"
+               text="Vendedor: vendedor@imperialmotors.com  /  vendedor123"
+               alignment="CENTER"
+               styleClass="muted"/>
+
+    </AnchorPane>
+</AnchorPane>

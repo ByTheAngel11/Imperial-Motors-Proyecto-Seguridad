@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>   <!-- 👈 agrega esto -->
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.users.UsersController"
+            prefWidth="1024" prefHeight="720">
+
+    <VBox spacing="16">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Label text="Gestión de Usuarios" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="8">
+            <TextField fx:id="txtBuscar" promptText="Buscar usuario..."/>
+            <Button text="Nuevo" fx:id="btnNuevo"/>
+            <Button text="Editar" fx:id="btnEditar"/>
+            <Button text="Eliminar" fx:id="btnEliminar"/>
+        </HBox>
+
+        <TableView fx:id="tblUsuarios" prefHeight="600">
+            <columns>
+                <TableColumn fx:id="colUsername" text="Usuario"/>
+                <TableColumn fx:id="colFullName" text="Nombre completo"/>
+                <TableColumn fx:id="colEmail" text="Correo"/>
+                <TableColumn fx:id="colRole" text="Rol"/>
+                <TableColumn fx:id="colActivo" text="Activo"/>
+                <TableColumn fx:id="colCreated" text="Creado"/>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

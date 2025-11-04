@@ -4,12 +4,12 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-public final class PasswordHasher {
+public final class PasswordUtiities {
     private static final int COST = 12;
     private static final int MAX_LEN = 72;
     private static final int MIN_LEN = 8;
 
-    private PasswordHasher() { }
+    private PasswordUtiities() { }
 
     public static String hashPassword(String plainTextPassword) {
         String pwd = sanitize(plainTextPassword);
