@@ -29,9 +29,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void onInventory() {
-        mostrarPendiente("Inventario");
-    }
+    private void onInventory() { loadPage("/userinterface/inventory/Inventory.fxml"); }
 
     @FXML
     private void onSales() {
