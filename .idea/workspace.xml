@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="Funciones agregadas" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,12 +28,12 @@
     &quot;assignee&quot;: &quot;ByTheAngel11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git&quot;,
-    &quot;accountId&quot;: &quot;5d081558-e410-477a-b193-4e439519074e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git",
+    "accountId": "cbf68542-f2d0-4a3b-864d-7d6881db4e3c"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/resources/org/example/imperialmotors/config.properties" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -135,10 +133,24 @@
       <workItem from="1762211873123" duration="6065000" />
       <workItem from="1762223596410" duration="4324000" />
       <workItem from="1762472707951" duration="39000" />
+      <workItem from="1762724370784" duration="149000" />
     </task>
+    <task id="LOCAL-00001" summary="Funciones agregadas">
+      <option name="closed" value="true" />
+      <created>1762724413071</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762724413071</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Funciones agregadas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Funciones agregadas" />
   </component>
 </project>
