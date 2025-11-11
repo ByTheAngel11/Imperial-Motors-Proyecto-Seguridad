@@ -1,0 +1,55 @@
+/* Fondo general de la ventana */
+.add-vehicle-root {
+    -fx-background-color: #f5f6fb;
+}
+
+/* Card central */
+.add-vehicle-card {
+    -fx-background-color: white;
+    -fx-padding: 32 48 32 48;
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 16, 0.2, 0, 4);
+}
+
+/* Título principal */
+.add-vehicle-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+/* Labels del formulario */
+.form-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4b5563;
+}
+
+/* Campos de texto y combo del formulario */
+.form-field {
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-background-color: #f3f4f6;
+    -fx-border-color: transparent;
+}
+
+/* Botón secundario (Cancelar) */
+.btn-secondary {
+    -fx-background-radius: 999;
+    -fx-padding: 8 20 8 20;
+    -fx-background-color: white;
+    -fx-border-radius: 999;
+    -fx-border-color: #e5e7eb;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+}
+
+/* Botón primario (Guardar) */
+.btn-primary {
+    -fx-background-radius: 999;
+    -fx-padding: 8 24 8 24;
+    -fx-background-color: #050816;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="contentArea" prefHeight="720" prefWidth="1024" stylesheets="@/resources/styles/inventory.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.inventory.InventoryController">
+
+    <children>
+        <VBox spacing="16" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+
+            <!-- Título -->
+            <Label styleClass="inv-title" text="Inventario de Vehículos" />
+
+            <!-- Barra de búsqueda + filtros + botón -->
+            <HBox spacing="12" styleClass="inv-toolbar">
+                <TextField fx:id="txtSearch" promptText="Buscar por marca, modelo o VIN..." styleClass="inv-search-field" HBox.hgrow="ALWAYS" />
+
+                <!-- Filtro marca -->
+                <ComboBox fx:id="cmbBrandFilter" prefWidth="180" styleClass="inv-filter">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Todas las marcas" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Filtro estado -->
+                <ComboBox fx:id="cmbStatusFilter" prefWidth="180" styleClass="inv-filter">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Todos los estados" />
+                            <String fx:value="DISPONIBLE" />
+                            <String fx:value="RESERVADO" />
+                            <String fx:value="VENDIDO" />
+                            <String fx:value="BAJA" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Button fx:id="btnNew" styleClass="inv-primary-button" text="+  Agregar Auto" onAction="#onAddVehicle"/>
+
+                <!-- Se mantienen para no romper nada, pero ocultos -->
+                <Button fx:id="btnEdit" managed="false" visible="false" />
+                <Button fx:id="btnDelete" managed="false" visible="false" />
+            </HBox>
+
+            <!-- Card de tabla -->
+            <VBox styleClass="inv-table-card" VBox.vgrow="ALWAYS">
+                <TableView fx:id="tblVehicle" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" prefWidth="60.0" text="ID" />
+                        <TableColumn fx:id="colMake" prefWidth="120.0" text="Marca" />
+                        <TableColumn fx:id="colModel" prefWidth="140.0" text="Modelo" />
+                        <TableColumn fx:id="colYear" prefWidth="80.0" text="Año" />
+                        <TableColumn fx:id="colVin" prefWidth="220.0" text="VIN" />
+                        <TableColumn fx:id="colPrice" prefWidth="120.0" text="Precio" />
+                        <TableColumn fx:id="colStatus" prefWidth="120.0" text="Estado" />
+                        <TableColumn fx:id="colActions" prefWidth="120.0" text="Acciones" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </children>
+</AnchorPane>
