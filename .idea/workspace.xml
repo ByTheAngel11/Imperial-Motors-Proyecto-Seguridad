@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logic/DAO/InventoryMovementDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/InventoryMovementDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/InventoryMovementType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/VehicleDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/VehiclePhotoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/VehicleStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/styles/inventory.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/styles/vehicle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/inventory/Inventory.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/inventory/InventoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/inventory/VehicleTableRow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/vehicle/AddVehicleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/vehicle/addVehicle.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/DAO/CustomerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/DTO/CustomerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerFormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomersView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="module-info" />
         <option value="Enum" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -47,12 +39,12 @@
     &quot;assignee&quot;: &quot;ByTheAngel11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git&quot;,
-    &quot;accountId&quot;: &quot;5d081558-e410-477a-b193-4e439519074e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git",
+    "accountId": "5f75bcfe-2965-42d8-9835-6c579e49b16e"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/resources/org/example/imperialmotors/config.properties" root0="SKIP_HIGHLIGHTING" />
@@ -65,32 +57,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GenerateHashes.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Imperial-Motors [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CLAUDIO/Documents/Aspectos de seguridad/Imperial-Motors-Proyecto-Seguridad&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.33678162&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GenerateHashes.executor": "Run",
+    "Application.Main.executor": "Run",
+    "JUnit.VehicleDAOTest.executor": "Run",
+    "JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor": "Run",
+    "Maven.Imperial-Motors [install].executor": "Run",
+    "Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/CLAUDIO/Documents/Aspectos de seguridad/Imperial-Motors-Proyecto-Seguridad",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.33678162",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\dashboard" />
@@ -102,7 +96,7 @@
   <component name="RunManager" selected="Application.Main">
     <configuration name="GenerateHashes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="utilities.GenerateHashes" />
-      <module name="Imperial-Motors" />
+      <module name="ImperialMotors" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="utilities.*" />
@@ -113,10 +107,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
-      <module name="Imperial-Motors" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\CLAUDIO\Archivos intelillij\javafx-sdk-21.0.7\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <module name="ImperialMotors" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\irene\IdeaProjects\BancoApp\oo\tareas\construccion\javafx-sdk-21.0.7\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.*" />
@@ -163,11 +157,12 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="" />
@@ -186,6 +181,7 @@
       <workItem from="1762721109500" duration="226000" />
       <workItem from="1762721358014" duration="21712000" />
       <workItem from="1762796151032" duration="8007000" />
+      <workItem from="1763327844932" duration="1454000" />
     </task>
     <servers />
   </component>

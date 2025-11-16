@@ -8,7 +8,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="userinterface.dashboard.DashboardController"
             prefWidth="1280" prefHeight="800"
-            stylesheets="@/styles/dashboard.css">
+            stylesheets="@/resources/styles/dashboard.css">
 
     <!-- ============ SIDEBAR IZQUIERDO ============ -->
     <left>

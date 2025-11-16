@@ -25,7 +25,7 @@ public class DashboardController {
 
     @FXML
     private void onClients() {
-        mostrarPendiente("Clientes");
+        loadPage("/userinterface/costumers/CustomersView.fxml");
     }
 
     @FXML
