@@ -3,10 +3,12 @@ package userinterface.costumers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Region;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.Region;
+import logic.DAO.AuditLogDAO;
 import logic.DAO.CustomerDAO;
 import logic.DTO.CustomerDTO;
+import utilities.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -35,10 +37,12 @@ public class CustomerFormController {
     @FXML private CheckBox ChkActive;
 
     private final CustomerDAO customerDao = new CustomerDAO();
+    private final AuditLogDAO auditLogDAO = new AuditLogDAO();
+
     private CustomerDTO editingCustomer;
 
     private Runnable onSaveCallback;
-    private Runnable onCloseCallback; // << NUEVO
+    private Runnable onCloseCallback;
 
     @FXML
     private void initialize() {
@@ -106,14 +110,18 @@ public class CustomerFormController {
 
     @FXML
     private void onSave(ActionEvent event) {
-        if (!validate()) return;
+        if (!validate()) {
+            return;
+        }
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirmar cambios");
         confirm.setHeaderText("¿Deseas guardar los cambios?");
         confirm.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
-        if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
+        if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+            return;
+        }
 
         try {
             boolean success = editingCustomer == null
@@ -121,8 +129,10 @@ public class CustomerFormController {
                     : updateCustomer();
 
             if (success) {
-                if (onSaveCallback != null) onSaveCallback.run();
-                closeWindow(); // << YA NO CIERRA EL STAGE
+                if (onSaveCallback != null) {
+                    onSaveCallback.run();
+                }
+                closeWindow();
             } else {
                 showError("No se pudieron guardar los cambios.");
             }
@@ -143,7 +153,14 @@ public class CustomerFormController {
         dto.setCreatedAt(now);
         dto.setUpdatedAt(now);
 
-        return customerDao.registerCustomer(dto);
+        boolean inserted = customerDao.registerCustomer(dto);
+
+        if (inserted) {
+            Long actorId = SessionManager.getCurrentAccountId();
+            auditLogDAO.logCustomerCreate(actorId, dto);
+        }
+
+        return inserted;
     }
 
     private boolean updateCustomer() throws SQLException, IOException {
@@ -153,7 +170,14 @@ public class CustomerFormController {
         editingCustomer.setIsActive(ChkActive.isSelected());
         editingCustomer.setUpdatedAt(LocalDateTime.now());
 
-        return customerDao.updateCustomer(editingCustomer);
+        boolean updated = customerDao.updateCustomer(editingCustomer);
+
+        if (updated) {
+            Long actorId = SessionManager.getCurrentAccountId();
+            auditLogDAO.logCustomerUpdate(actorId, editingCustomer);
+        }
+
+        return updated;
     }
 
     @FXML
@@ -162,7 +186,6 @@ public class CustomerFormController {
     }
 
     private void closeWindow() {
-        // << YA NO SE CIERRA EL STAGE
         if (onCloseCallback != null) {
             onCloseCallback.run();
         }

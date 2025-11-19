@@ -43,7 +43,6 @@ public class CustomerDAO {
         try (Connection connection = ConnectionDataBase.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_INSERT)) {
 
-            // Generar ID automáticamente tipo C0001, C0002, ...
             String nextNumber = getNextCustomerNumber(connection);
             customer.setCostumerNumber(nextNumber);
 

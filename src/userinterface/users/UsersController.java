@@ -8,18 +8,11 @@ import logic.DAO.AccountDAO;
 import logic.DAO.UserDAO;
 import logic.DTO.AccountDTO;
 import logic.DTO.UserDTO;
-import userinterface.users.UserTableRow;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Controlador del módulo de Usuarios.
- * Usa UserDAO y AccountDAO para obtener la información.
- */
 public class UsersController {
 
     @FXML private TableView<UserTableRow> tblUsuarios;
@@ -92,12 +85,11 @@ public class UsersController {
 
             usuarios.setAll(rows);
 
-        } catch (Exception e) { // <-- aquí ya agarras NPE, etc.
-            e.printStackTrace(); // que lo veas en consola
+        } catch (Exception e) {
+            e.printStackTrace();
             mostrarError("Error al cargar usuarios", e.toString());
         }
     }
-
 
     private void filtrar(String texto) {
         if (texto == null || texto.isBlank()) {
@@ -111,8 +103,6 @@ public class UsersController {
                         || u.getEmail().toLowerCase().contains(filtro))
                 .collect(Collectors.toList()));
     }
-
-    // --- Acciones CRUD ---
 
     @FXML
     private void onNuevo() {
@@ -140,7 +130,6 @@ public class UsersController {
 
         if (confirm.getResult() == ButtonType.YES) {
             try {
-                // eliminación física según tu DAO (podrías reemplazar con borrado lógico si lo prefieres)
                 UserDTO user = userDAO.findUserByPersonnelNumber(seleccionado.getUsername());
                 if (user != null) {
                     userDAO.deleteUser(user.getPersonnelNumber());
@@ -152,8 +141,6 @@ public class UsersController {
             }
         }
     }
-
-    // --- Helpers de UI ---
 
     private void mostrarInfo(String titulo, String msg) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);

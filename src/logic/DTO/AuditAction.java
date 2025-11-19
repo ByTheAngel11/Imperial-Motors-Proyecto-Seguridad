@@ -1,5 +1,6 @@
 package logic.DTO;
 
+
 public enum AuditAction {
     CREATE,
     UPDATE,
@@ -9,3 +10,4 @@ public enum AuditAction {
     ANULACION,
     CONFIG
 }
+

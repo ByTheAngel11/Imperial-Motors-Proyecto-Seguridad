@@ -72,7 +72,7 @@ public class SaleDAO {
             try {
                 long saleId = insertSale(connection, sale);
                 updateVehicleAsSold(connection, sale.getVehicleId());
-                insertInventoryMovement(connection, sale, saleId);
+                insertInventoryMovementSale(connection, sale, saleId);
                 insertAuditLog(connection, sale, saleId);
                 connection.commit();
                 return saleId;
@@ -98,10 +98,12 @@ public class SaleDAO {
                 }
 
                 SaleStatus newStatus = sale.getStatus();
+                SaleStatus previousStatus = current.getStatus();
                 LocalDateTime now = LocalDateTime.now();
 
                 sale.setCreatedAt(current.getCreatedAt());
 
+                // --- Fechas y motivo según nuevo estado ---
                 if (newStatus == SaleStatus.ANULADA) {
                     sale.setAnnulledAt(now);
                     if (sale.getAnnulReason() == null || sale.getAnnulReason().trim().isEmpty()) {
@@ -118,11 +120,27 @@ public class SaleDAO {
                     sale.setAnnulReason(null);
                 }
 
+                // ¿Pasa de no anulada -> ANULADA?
+                boolean isLogicalDelete =
+                        previousStatus != SaleStatus.ANULADA && newStatus == SaleStatus.ANULADA;
+
                 String beforeJson = buildAfterDataJson(current);
                 String afterJson = buildAfterDataJson(sale);
 
+                // 1) Actualizar venta
                 updateSaleRow(connection, sale);
 
+                // 2) Movimientos de inventario
+                if (isLogicalDelete) {
+                    // Anulación: liberar vehículo + movimiento LIBERACION
+                    updateVehicleAsAvailable(connection, sale.getVehicleId());
+                    insertInventoryLiberationMovement(connection, sale);
+                } else {
+                    // Cualquier guardado de cambios normal: movimiento AJUSTE
+                    insertInventoryAdjustmentMovement(connection, sale);
+                }
+
+                // 3) Audit log
                 insertAuditLog(
                         connection,
                         sale.getSellerAccountId(),
@@ -230,7 +248,22 @@ public class SaleDAO {
         }
     }
 
-    private void insertInventoryMovement(Connection connection, SaleDTO sale, long saleId) throws SQLException {
+    private void updateVehicleAsAvailable(Connection connection, Long vehicleId) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_VEHICLE_STATUS_SQL)) {
+            statement.setString(1, VehicleStatus.DISPONIBLE.name());
+            statement.setLong(2, vehicleId);
+
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating vehicle status to DISPONIBLE failed, no rows affected.");
+            }
+        }
+    }
+
+    // ===== Movimientos de inventario =====
+
+    // Alta por venta nueva
+    private void insertInventoryMovementSale(Connection connection, SaleDTO sale, long saleId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_INVENTORY_MOVEMENT_SQL)) {
             statement.setLong(1, sale.getVehicleId());
             statement.setString(2, InventoryMovementType.VENTA.name());
@@ -241,6 +274,34 @@ public class SaleDAO {
             statement.executeUpdate();
         }
     }
+
+    // Liberación por anulación
+    private void insertInventoryLiberationMovement(Connection connection, SaleDTO sale) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_INVENTORY_MOVEMENT_SQL)) {
+            statement.setLong(1, sale.getVehicleId());
+            statement.setString(2, InventoryMovementType.LIBERACION.name());
+            statement.setString(3, REF_TABLE_SALE);
+            statement.setLong(4, sale.getSaleId());
+            statement.setString(5, "Anulación venta folio " + sale.getFolio());
+            statement.setLong(6, sale.getSellerAccountId());
+            statement.executeUpdate();
+        }
+    }
+
+    // AJUSTE por guardar cambios de una venta
+    private void insertInventoryAdjustmentMovement(Connection connection, SaleDTO sale) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_INVENTORY_MOVEMENT_SQL)) {
+            statement.setLong(1, sale.getVehicleId());
+            statement.setString(2, InventoryMovementType.AJUSTE.name());
+            statement.setString(3, REF_TABLE_SALE);
+            statement.setLong(4, sale.getSaleId());
+            statement.setString(5, "Ajuste venta folio " + sale.getFolio());
+            statement.setLong(6, sale.getSellerAccountId());
+            statement.executeUpdate();
+        }
+    }
+
+    // ===== Audit log =====
 
     private void insertAuditLog(Connection connection, SaleDTO sale, long saleId) throws SQLException {
         String afterDataJson = buildAfterDataJson(sale);

@@ -1,8 +1,10 @@
 package logic.DAO;
 
 import dataaccess.ConnectionDataBase;
+import logic.DTO.AuditAction;
 import logic.DTO.InventoryMovementDTO;
 import logic.DTO.InventoryMovementType;
+
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -33,9 +35,23 @@ public class InventoryMovementDAO {
                     "WHERE vehicle_id = ? " +
                     "ORDER BY created_at DESC " +
                     "LIMIT 1";
+    // --- Audit log ---
+    private static final String ENTITY_INVENTORY_MOVEMENT = "inventory_movement";
+
+    private static final String SQL_INSERT_AUDIT =
+            "INSERT INTO audit_log " +
+                    "(account_id, action, entity, entity_id, before_data, after_data, ip_address) " +
+                    "VALUES (?, ?, ?, ?, NULL, ?, 'LOCALHOST')";
+
     /**
      * Inserta un movimiento de inventario.
      * Asigna el movement_id generado en el DTO si la inserción es exitosa.
+     * Además registra la operación en audit_log.
+     */
+    /**
+     * Inserta un movimiento de inventario.
+     * Asigna el movement_id generado en el DTO si la inserción es exitosa.
+     * Además registra la operación en audit_log.
      */
     public boolean insertInventoryMovement(InventoryMovementDTO movement) throws SQLException, IOException {
         try (Connection connection = ConnectionDataBase.getConnection();
@@ -76,6 +92,11 @@ public class InventoryMovementDAO {
                 if (keys.next()) {
                     movement.setMovementId(keys.getLong(1));
                 }
+            }
+
+            // === Audit ===
+            if (result && movement.getMovementId() != null) {
+                insertAuditLogForMovement(connection, movement);
             }
 
             return result;
@@ -216,5 +237,55 @@ public class InventoryMovementDAO {
         movement.setCreatedAt(createdAt);
 
         return movement;
+    }
+
+    // ---------- Audit helpers ----------
+
+    private void insertAuditLogForMovement(
+            Connection connection,
+            InventoryMovementDTO movement) throws SQLException {
+
+        String afterJson = buildAfterDataJson(movement);
+
+        try (PreparedStatement statement = connection.prepareStatement(SQL_INSERT_AUDIT)) {
+            statement.setLong(1, movement.getAccountId());
+            statement.setString(2, AuditAction.CREATE.name());
+            statement.setString(3, ENTITY_INVENTORY_MOVEMENT);
+            statement.setLong(4, movement.getMovementId());
+            statement.setString(5, afterJson);
+            statement.executeUpdate();
+        }
+    }
+
+    private String buildAfterDataJson(InventoryMovementDTO movement) {
+        String refTableJson = movement.getRefTable() == null
+                ? "null"
+                : "\"" + escapeJson(movement.getRefTable()) + "\"";
+
+        String refIdJson = movement.getRefId() == null
+                ? "null"
+                : movement.getRefId().toString();
+
+        String noteJson = movement.getNote() == null
+                ? "null"
+                : "\"" + escapeJson(movement.getNote()) + "\"";
+
+        return "{"
+                + "\"vehicleId\":" + movement.getVehicleId() + ","
+                + "\"type\":\"" + movement.getType().name() + "\","
+                + "\"refTable\":" + refTableJson + ","
+                + "\"refId\":" + refIdJson + ","
+                + "\"note\":" + noteJson + ","
+                + "\"accountId\":" + movement.getAccountId()
+                + "}";
+    }
+
+    private String escapeJson(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"");
     }
 }

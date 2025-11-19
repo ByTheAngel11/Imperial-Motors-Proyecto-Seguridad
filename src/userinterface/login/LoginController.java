@@ -8,9 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.DAO.AccountDAO;
+import logic.DAO.AuditLogDAO;
 import logic.DTO.AccountDTO;
 import utilities.PasswordUtiities;
 import utilities.SessionManager;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -29,6 +31,7 @@ public class LoginController {
     private Hyperlink lnkForgot;
 
     private final AccountDAO accountDAO = new AccountDAO();
+    private final AuditLogDAO auditLogDAO = new AuditLogDAO();
 
     @FXML
     public void initialize() {
@@ -63,14 +66,17 @@ public class LoginController {
         }
 
         try {
-            AccountDTO account = accountDAO.findAccountByEmail(email.toLowerCase());
+            String normalizedEmail = email.toLowerCase();
+            AccountDTO account = accountDAO.findAccountByEmail(normalizedEmail);
 
             if (account == null) {
+                auditLogDAO.logLoginFailure(normalizedEmail);
                 mostrarErrorLogin();
                 return;
             }
 
             if (!Boolean.TRUE.equals(account.getIsActive()) || account.getDeletedAt() != null) {
+                auditLogDAO.logLoginFailure(normalizedEmail);
                 mostrarError("Cuenta inactiva",
                         "La cuenta está desactivada o ha sido eliminada. Consulta con el administrador.");
                 return;
@@ -78,12 +84,17 @@ public class LoginController {
 
             boolean ok = PasswordUtiities.verifyPassword(password, account.getPasswordHash());
             if (!ok) {
+                auditLogDAO.logLoginFailure(normalizedEmail);
                 mostrarErrorLogin();
                 return;
             }
+
             SessionManager.setCurrentAccountId(account.getAccountId());
-            SessionManager.setCurrentRole(account.getRole()); 
+            SessionManager.setCurrentRole(account.getRole());
             SessionManager.setCurrentIsActive(account.getIsActive());
+
+            auditLogDAO.logLoginSuccess(account.getAccountId(), normalizedEmail);
+
             abrirDashboard(account);
 
         } catch (SQLException | IOException ex) {
@@ -116,8 +127,7 @@ public class LoginController {
     }
 
     private void mostrarError(String titulo, String mensaje) {
-        Alert a = new Alert(AlertType.ERROR);
-        a.isResizable();
+        Alert a = new Alert(Alert.AlertType.ERROR);
         a.setResizable(true);
         a.setTitle(titulo);
         a.setHeaderText(null);

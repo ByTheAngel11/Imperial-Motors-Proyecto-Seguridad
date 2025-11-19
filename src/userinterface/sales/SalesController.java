@@ -117,10 +117,18 @@ public class SalesController {
     }
 
     private void configureDetailRecalc() {
+        // Recalcular total cuando cambien subtotal, descuento o impuestos
+        TxtSubtotal.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
         TxtDiscount.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
         TxtTaxes.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
-    }
 
+        // Cuando el campo de ID vehículo pierda el foco, traer el precio
+        TxtVehicleId.focusedProperty().addListener((obs, oldFocus, newFocus) -> {
+            if (!newFocus) { // perdió el foco
+                onVehicleIdChanged();
+            }
+        });
+    }
     private String safe(String v) {
         return v == null ? "" : v;
     }
@@ -186,6 +194,54 @@ public class SalesController {
             TxtTotal.setText(total.toPlainString());
         } catch (Exception ex) {
             // Ignoramos mientras el usuario escribe (para no spamear alertas)
+        }
+    }
+
+    private void onVehicleIdChanged() {
+        String text = TxtVehicleId.getText();
+        if (text == null || text.trim().isEmpty()) {
+            TxtSubtotal.clear();
+            TxtTotal.clear();
+            return;
+        }
+
+        try {
+            long vehicleId = parseLong(text, "ID vehículo");
+
+            VehicleDTO vehicle;
+            try {
+                vehicle = vehicleDao.findVehicleById(vehicleId);
+            } catch (SQLException | IOException ex) {
+                showError("No se pudo consultar el vehículo: " + ex.getMessage());
+                TxtSubtotal.clear();
+                TxtTotal.clear();
+                return;
+            }
+
+            if (vehicle == null || vehicle.getVehicleId() == null) {
+                showError("El vehículo con ID " + vehicleId + " no existe.");
+                TxtSubtotal.clear();
+                TxtTotal.clear();
+                return;
+            }
+
+            if (vehicle.getPrice() == null) {
+                showError("El vehículo con ID " + vehicleId + " no tiene precio configurado.");
+                TxtSubtotal.clear();
+                TxtTotal.clear();
+                return;
+            }
+
+            // Subtotal = precio del vehículo
+            TxtSubtotal.setText(vehicle.getPrice().toPlainString());
+
+            // Recalcular total con el nuevo subtotal
+            recalcDetailTotal();
+
+        } catch (IllegalArgumentException ex) {
+            showError(ex.getMessage());
+            TxtSubtotal.clear();
+            TxtTotal.clear();
         }
     }
 

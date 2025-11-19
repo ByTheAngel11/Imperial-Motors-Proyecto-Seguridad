@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/CustomerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/InventoryMovementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/InventoryMovementDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/SaleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/SaleDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DTO/AuditAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DTO/AuditAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/costumers/CustomerFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/users/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/users/UsersController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +28,8 @@
         <option value="module-info" />
         <option value="JavaFXApplication" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -34,12 +42,12 @@
     &quot;assignee&quot;: &quot;ByTheAngel11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git",
-    "accountId": "2a00652b-6ee2-40d4-a6b6-8700aab5f506"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git&quot;,
+    &quot;accountId&quot;: &quot;2a00652b-6ee2-40d4-a6b6-8700aab5f506&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/resources/org/example/imperialmotors/config.properties" root0="SKIP_HIGHLIGHTING" />
@@ -51,6 +59,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -59,34 +70,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GenerateHashes.executor": "Run",
-    "Application.Main.executor": "Run",
-    "JUnit.VehicleDAOTest.executor": "Run",
-    "JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor": "Run",
-    "Maven.Imperial-Motors [install].executor": "Run",
-    "Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/reino/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.33678162",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GenerateHashes.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/reino/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33678162&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\dashboard" />
