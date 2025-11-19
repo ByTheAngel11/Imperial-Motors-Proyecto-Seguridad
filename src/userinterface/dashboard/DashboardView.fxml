@@ -72,7 +72,12 @@
                         styleClass="nav-item"
                         maxWidth="Infinity"
                         alignment="CENTER_LEFT"/>
-
+                <Button fx:id="btnCompras"
+                        text="Compras"
+                        onAction="#onPurchases"
+                        styleClass="nav-item"
+                        maxWidth="Infinity"
+                        alignment="CENTER_LEFT"/>
                 <Button fx:id="btnProveedores"
                         text="Proveedores"
                         onAction="#onProviders"

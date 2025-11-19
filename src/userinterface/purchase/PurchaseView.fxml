@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.purchase.PurchaseController"
+            fx:id="contentArea"
+            stylesheets="@/styles/inventory.css"
+            styleClass="anchor-pane">
+
+    <children>
+        <VBox spacing="20"
+              AnchorPane.topAnchor="24.0"
+              AnchorPane.bottomAnchor="24.0"
+              AnchorPane.leftAnchor="32.0"
+              AnchorPane.rightAnchor="32.0">
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Compras"
+                       styleClass="inv-title"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="BtnNewPurchase"
+                        text="Registrar compra"
+                        onAction="#onNewPurchase"
+                        styleClass="inv-primary-button"/>
+            </HBox>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <TextField fx:id="TxtSearchPurchase"
+                           promptText="Buscar por proveedor o ID de compra..."
+                           styleClass="inv-search-field"
+                           HBox.hgrow="ALWAYS"/>
+
+                <ComboBox fx:id="CmbStatusFilter"
+                          prefWidth="180"
+                          promptText="Estado de la compra"
+                          styleClass="inv-filter"/>
+            </HBox>
+
+            <BorderPane prefWidth="0"
+                        styleClass="inv-table-card"
+                        VBox.vgrow="ALWAYS">
+
+                <center>
+                    <TableView fx:id="TblPurchases">
+                        <columns>
+                            <TableColumn fx:id="ColId" text="ID" prefWidth="80"/>
+                            <TableColumn fx:id="ColSupplier" text="Proveedor" prefWidth="120"/>
+                            <TableColumn fx:id="ColTotal" text="Total" prefWidth="100"/>
+                            <TableColumn fx:id="ColStatus" text="Estado" prefWidth="120"/>
+                            <TableColumn fx:id="ColCreatedAt" text="Creada" prefWidth="160"/>
+                        </columns>
+                    </TableView>
+                </center>
+
+                <right>
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                        <content>
+                            <VBox spacing="20"
+                                  prefWidth="420"
+                                  alignment="TOP_LEFT">
+
+                                <padding>
+                                    <Insets top="24" right="24" bottom="24" left="24"/>
+                                </padding>
+
+                                <Label text="Detalle de la compra"
+                                       styleClass="inv-title"/>
+
+                                <Separator/>
+
+                                <GridPane hgap="24" vgap="18">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="110" halignment="LEFT"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
+
+                                    <Label text="ID de compra" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtPurchaseId"
+                                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="ID de proveedor" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtSupplierId"
+                                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="ID del comprador" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtAccountId"
+                                               GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Fecha esperada" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <DatePicker fx:id="DpExpectedDate"
+                                                GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                                styleClass="inv-search-field"/>
+
+                                    <Label text="Subtotal" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtSubtotal"
+                                               GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Total" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtTotal"
+                                               GridPane.rowIndex="5" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Estado" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtStatus"
+                                               GridPane.rowIndex="6" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+                                </GridPane>
+
+                                <!-- Botones en columna, con estilos pedidos -->
+                                <VBox spacing="10" alignment="CENTER_RIGHT">
+                                    <Button fx:id="BtnSaveChanges"
+                                            text="Guardar cambios"
+                                            onAction="#onSaveChanges"
+                                            styleClass="inv-primary-button"
+                                            prefWidth="220"/>
+
+                                    <Button fx:id="BtnMarkReceived"
+                                            text="Marcar como recibida"
+                                            onAction="#onMarkReceived"
+                                            styleClass="inv-primary-button"
+                                            prefWidth="220"
+                                            style="-fx-background-color: white; -fx-text-fill: black;"/>
+
+                                    <Button fx:id="BtnCancelPurchase"
+                                            text="Cancelar compra"
+                                            onAction="#onCancelPurchase"
+                                            styleClass="inv-primary-button"
+                                            prefWidth="220"/>
+                                </VBox>
+                            </VBox>
+                        </content>
+                    </ScrollPane>
+                </right>
+
+            </BorderPane>
+        </VBox>
+    </children>
+</AnchorPane>

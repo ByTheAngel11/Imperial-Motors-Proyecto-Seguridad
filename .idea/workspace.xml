@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="" />
+    <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="Enum" />
         <option value="JavaFXApplication" />
+        <option value="Enum" />
         <option value="Class" />
         <option value="FxmlFile" />
       </list>
