@@ -30,12 +30,12 @@
     &quot;assignee&quot;: &quot;ByTheAngel11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git&quot;,
-    &quot;accountId&quot;: &quot;5f75bcfe-2965-42d8-9835-6c579e49b16e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git",
+    "accountId": "2a00652b-6ee2-40d4-a6b6-8700aab5f506"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/resources/org/example/imperialmotors/config.properties" root0="SKIP_HIGHLIGHTING" />
