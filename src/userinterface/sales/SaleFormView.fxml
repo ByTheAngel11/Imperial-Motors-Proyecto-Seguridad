@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="RootPane"
+            fx:controller="userinterface.sales.SaleFormController"
+            stylesheets="@/resources/styles/vehicle.css">
+
+    <children>
+        <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                   AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+            <children>
+                <VBox spacing="24" alignment="TOP_CENTER">
+
+                    <children>
+
+                        <VBox spacing="24"
+                              prefWidth="1150"
+                              styleClass="add-vehicle-card">
+
+                            <children>
+
+                                <Label fx:id="LblTitle"
+                                       text="Registrar venta"
+                                       styleClass="add-vehicle-title"/>
+
+                                <GridPane hgap="40" vgap="18">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="50"/>
+                                        <ColumnConstraints percentWidth="50"/>
+                                    </columnConstraints>
+
+                                    <!-- Folio -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="Folio" styleClass="form-label"/>
+                                            <TextField fx:id="TxtFolio"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"
+                                                       promptText="Autogenerado"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- ID vehículo -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="ID vehículo *" styleClass="form-label"/>
+                                            <TextField fx:id="TxtVehicleId"
+                                                       styleClass="form-field"
+                                                       promptText="ID del vehículo"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- No. cliente -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="No. cliente *" styleClass="form-label"/>
+                                            <TextField fx:id="TxtCostumerNumber"
+                                                       styleClass="form-field"
+                                                       promptText="C0001"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Subtotal -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="Subtotal" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtSubtotal"
+                                                       GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                                       editable="false"
+                                                       styleClass="inv-search-field inv-field-disabled"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Descuento -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="2" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="Descuento (%)" styleClass="form-label"/>
+                                            <TextField fx:id="TxtDiscount"
+                                                       styleClass="form-field"
+                                                       promptText="0.00"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Impuestos -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="Impuestos" styleClass="form-label"/>
+                                            <TextField fx:id="TxtTaxes"
+                                                       styleClass="form-field"
+                                                       promptText="0.00"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Total -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="3" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="Total" styleClass="form-label"/>
+                                            <TextField fx:id="TxtTotal"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"
+                                                       promptText="Subtotal - Desc. + Imp."/>
+                                        </children>
+                                    </VBox>
+
+                                </GridPane>
+
+                                <Separator/>
+
+                                <HBox spacing="12" alignment="CENTER_RIGHT">
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Button fx:id="BtnCancel" text="Cancelar"
+                                            onAction="#onCancel"
+                                            styleClass="btn-secondary"/>
+                                    <Button fx:id="BtnSave" text="Guardar"
+                                            onAction="#onSave"
+                                            styleClass="btn-primary"/>
+                                </HBox>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </VBox>
+
+            </children>
+        </StackPane>
+
+    </children>
+</AnchorPane>

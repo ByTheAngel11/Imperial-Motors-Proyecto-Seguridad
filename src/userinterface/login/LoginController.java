@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import logic.DAO.AccountDAO;
 import logic.DTO.AccountDTO;
 import utilities.PasswordUtiities;
-
+import utilities.SessionManager;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -81,6 +81,9 @@ public class LoginController {
                 mostrarErrorLogin();
                 return;
             }
+            SessionManager.setCurrentAccountId(account.getAccountId());
+            SessionManager.setCurrentRole(account.getRole()); 
+            SessionManager.setCurrentIsActive(account.getIsActive());
             abrirDashboard(account);
 
         } catch (SQLException | IOException ex) {

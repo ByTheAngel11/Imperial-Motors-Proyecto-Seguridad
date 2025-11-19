@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logic/DAO/CustomerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/DTO/CustomerDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerForm.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerFormController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerListController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomersView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/login/LoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +19,9 @@
       <list>
         <option value="module-info" />
         <option value="Enum" />
-        <option value="FxmlFile" />
+        <option value="JavaFXApplication" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -39,15 +34,22 @@
     &quot;assignee&quot;: &quot;ByTheAngel11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git",
-    "accountId": "5f75bcfe-2965-42d8-9835-6c579e49b16e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ByTheAngel11/Imperial-Motors-Proyecto-Seguridad.git&quot;,
+    &quot;accountId&quot;: &quot;5f75bcfe-2965-42d8-9835-6c579e49b16e&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/resources/org/example/imperialmotors/config.properties" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -57,34 +59,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GenerateHashes.executor": "Run",
-    "Application.Main.executor": "Run",
-    "JUnit.VehicleDAOTest.executor": "Run",
-    "JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor": "Run",
-    "Maven.Imperial-Motors [install].executor": "Run",
-    "Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/CLAUDIO/Documents/Aspectos de seguridad/Imperial-Motors-Proyecto-Seguridad",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.33678162",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GenerateHashes.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/reino/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33678162&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\dashboard" />
@@ -109,8 +111,8 @@
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
-      <module name="ImperialMotors" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\irene\IdeaProjects\BancoApp\oo\tareas\construccion\javafx-sdk-21.0.7\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <module name="Imperial-Motors" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib&quot; --add-modules javafx.controls,javafx.fxml " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.*" />
@@ -153,14 +155,6 @@
         <item itemvalue="Application.GenerateHashes" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

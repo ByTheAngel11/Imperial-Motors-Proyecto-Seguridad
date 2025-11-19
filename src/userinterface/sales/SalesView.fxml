@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.sales.SalesController"
+            fx:id="contentArea"
+            stylesheets="@/styles/inventory.css"
+            styleClass="anchor-pane">
+
+    <children>
+        <VBox spacing="20"
+              AnchorPane.topAnchor="24.0"
+              AnchorPane.bottomAnchor="24.0"
+              AnchorPane.leftAnchor="32.0"
+              AnchorPane.rightAnchor="32.0">
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Ventas"
+                       styleClass="inv-title"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="BtnNewSale"
+                        text="+ Registrar venta"
+                        onAction="#onNewSale"
+                        styleClass="inv-primary-button"/>
+            </HBox>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <TextField fx:id="TxtSearchSale"
+                           promptText="Buscar por folio, cliente o vehículo..."
+                           styleClass="inv-search-field"
+                           HBox.hgrow="ALWAYS"/>
+
+                <ComboBox fx:id="CmbStatusFilter"
+                          prefWidth="180"
+                          promptText="Estado de la venta"
+                          styleClass="inv-filter"/>
+            </HBox>
+
+            <BorderPane prefWidth="0"
+                        styleClass="inv-table-card"
+                        VBox.vgrow="ALWAYS">
+
+                <center>
+                    <TableView fx:id="TblSales">
+                        <columns>
+                            <TableColumn fx:id="ColFolio" text="Folio" prefWidth="140"/>
+                            <TableColumn fx:id="ColCustomer" text="Cliente" prefWidth="220"/>
+                            <TableColumn fx:id="ColVehicle" text="Vehículo" prefWidth="200"/>
+                            <TableColumn fx:id="ColTotal" text="Total" prefWidth="120"/>
+                            <TableColumn fx:id="ColStatus" text="Estado" prefWidth="120"/>
+                        </columns>
+                    </TableView>
+                </center>
+
+                <right>
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                        <content>
+                            <VBox spacing="20"
+                                  prefWidth="420"
+                                  alignment="TOP_LEFT">
+
+                                <padding>
+                                    <Insets top="24" right="24" bottom="24" left="24"/>
+                                </padding>
+
+                                <Label text="Detalle de venta"
+                                       styleClass="inv-title"/>
+
+                                <Separator/>
+
+                                <GridPane hgap="24" vgap="18">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="110" halignment="LEFT"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
+
+                                    <Label text="Folio" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtFolio" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                                               editable="false" styleClass="inv-search-field"/>
+
+                                    <Label text="ID vehículo" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtVehicleId" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="No. cliente" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtCostumerNumber" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Subtotal" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtSubtotal" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Descuento (%)" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtDiscount" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Impuestos" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtTaxes" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Estado" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtStatus"
+                                               GridPane.rowIndex="6" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <Label text="Total" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtTotal"
+                                               GridPane.rowIndex="7" GridPane.columnIndex="1"
+                                               editable="false" styleClass="inv-search-field"/>
+                                </GridPane>
+
+                                <HBox spacing="8" alignment="CENTER_RIGHT">
+                                    <Button fx:id="BtnAnnulSale" text="Anular venta"
+                                            onAction="#onAnnulSale"
+                                            styleClass="inv-action-button"/>
+
+                                    <Button fx:id="BtnSaveSale" text="Guardar venta"
+                                            onAction="#onSaveSale" styleClass="inv-primary-button"/>
+
+                                    <Button fx:id="BtnClearForm" text="Limpiar"
+                                            onAction="#onClearForm" styleClass="inv-action-button"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </ScrollPane>
+                </right>
+
+            </BorderPane>
+        </VBox>
+    </children>
+</AnchorPane>
