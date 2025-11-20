@@ -120,23 +120,18 @@ public class SaleDAO {
                     sale.setAnnulReason(null);
                 }
 
-                // ¿Pasa de no anulada -> ANULADA?
                 boolean isLogicalDelete =
                         previousStatus != SaleStatus.ANULADA && newStatus == SaleStatus.ANULADA;
 
                 String beforeJson = buildAfterDataJson(current);
                 String afterJson = buildAfterDataJson(sale);
 
-                // 1) Actualizar venta
                 updateSaleRow(connection, sale);
 
-                // 2) Movimientos de inventario
                 if (isLogicalDelete) {
-                    // Anulación: liberar vehículo + movimiento LIBERACION
                     updateVehicleAsAvailable(connection, sale.getVehicleId());
                     insertInventoryLiberationMovement(connection, sale);
                 } else {
-                    // Cualquier guardado de cambios normal: movimiento AJUSTE
                     insertInventoryAdjustmentMovement(connection, sale);
                 }
 

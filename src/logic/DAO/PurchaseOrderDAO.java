@@ -239,10 +239,6 @@ public class PurchaseOrderDAO {
         }
     }
 
-    /**
-     * Actualiza los datos principales de la orden (proveedor, fecha esperada, subtotal).
-     * Solo permite modificar órdenes en estado CREADA.
-     */
     public void updatePurchase(PurchaseOrderDTO order, long actorAccountId) throws SQLException {
         if (order == null || order.getPurchaseId() == null) {
             throw new SQLException("La orden de compra a actualizar no es válida.");
@@ -270,7 +266,6 @@ public class PurchaseOrderDAO {
             BigDecimal beforeSubtotal = null;
             String statusStr;
 
-            // Leer valores actuales
             try (PreparedStatement stmtSelect = connection.prepareStatement(sqlSelect)) {
                 stmtSelect.setLong(1, purchaseId);
                 try (ResultSet rs = stmtSelect.executeQuery()) {

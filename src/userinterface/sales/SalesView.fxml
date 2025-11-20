@@ -80,40 +80,84 @@
                                         <ColumnConstraints hgrow="ALWAYS"/>
                                     </columnConstraints>
 
+                                    <!-- FILA 0: Folio -->
                                     <Label text="Folio" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtFolio" GridPane.rowIndex="0" GridPane.columnIndex="1"
-                                               editable="false" styleClass="inv-search-field"/>
-
-                                    <Label text="ID vehículo" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtVehicleId" GridPane.rowIndex="1" GridPane.columnIndex="1"
-                                               styleClass="inv-search-field"/>
-
-                                    <Label text="No. cliente" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtCostumerNumber" GridPane.rowIndex="2" GridPane.columnIndex="1"
-                                               styleClass="inv-search-field"/>
-
-                                    <Label text="Subtotal" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtSubtotal" GridPane.rowIndex="3" GridPane.columnIndex="1"
-                                               styleClass="inv-search-field"/>
-
-                                    <Label text="Descuento (%)" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtDiscount" GridPane.rowIndex="4" GridPane.columnIndex="1"
-                                               styleClass="inv-search-field"/>
-
-                                    <Label text="Impuestos" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtTaxes" GridPane.rowIndex="5" GridPane.columnIndex="1"
-                                               styleClass="inv-search-field"/>
-
-                                    <Label text="Estado" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtStatus"
-                                               GridPane.rowIndex="6" GridPane.columnIndex="1"
+                                    <TextField fx:id="TxtFolio"
+                                               GridPane.rowIndex="0" GridPane.columnIndex="1"
                                                editable="false"
                                                styleClass="inv-search-field"/>
 
-                                    <Label text="Total" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-                                    <TextField fx:id="TxtTotal"
+                                    <!-- FILA 1: ID vehículo -->
+                                    <Label text="ID vehículo" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtVehicleId"
+                                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 2: Marca -->
+                                    <Label text="Marca" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtVehicleMake"
+                                               GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 3: Modelo -->
+                                    <Label text="Modelo" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtVehicleModel"
+                                               GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 4: Color -->
+                                    <Label text="Color" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtVehicleColor"
+                                               GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 5: Año -->
+                                    <Label text="Año" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtVehicleYear"
+                                               GridPane.rowIndex="5" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 6: No. cliente -->
+                                    <Label text="No. cliente" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtCostumerNumber"
+                                               GridPane.rowIndex="6" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 7: Subtotal -->
+                                    <Label text="Subtotal" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtSubtotal"
                                                GridPane.rowIndex="7" GridPane.columnIndex="1"
-                                               editable="false" styleClass="inv-search-field"/>
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 8: Descuento -->
+                                    <Label text="Descuento (%)" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtDiscount"
+                                               GridPane.rowIndex="8" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 9: Impuestos -->
+                                    <Label text="Impuestos" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtTaxes"
+                                               GridPane.rowIndex="9" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 10: Estado -->
+                                    <Label text="Estado" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtStatus"
+                                               GridPane.rowIndex="10" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 11: Total -->
+                                    <Label text="Total" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtTotal"
+                                               GridPane.rowIndex="11" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
                                 </GridPane>
 
                                 <HBox spacing="8" alignment="CENTER_RIGHT">

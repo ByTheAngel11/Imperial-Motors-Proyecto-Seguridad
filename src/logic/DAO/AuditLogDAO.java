@@ -40,7 +40,7 @@ public class AuditLogDAO {
     public void logLoginFailure(String email) throws SQLException, IOException {
         String afterJson = "{\"email\":\"" + escapeJson(email) + "\",\"success\":false}";
         insertAudit(
-                null,                       // no sabemos la cuenta todavía
+                null,
                 AuditAction.LOGIN,
                 ENTITY_AUTH,
                 ENTITY_ID_NONE,
@@ -61,7 +61,6 @@ public class AuditLogDAO {
         );
     }
 
-    // ================== CLIENTES ==================
 
     public void logCustomerCreate(Long actorId, CustomerDTO customer) throws SQLException, IOException {
         String afterJson = buildCustomerJson(customer);
@@ -70,7 +69,7 @@ public class AuditLogDAO {
                 actorId,
                 AuditAction.CREATE,
                 ENTITY_CUSTOMER,
-                ENTITY_ID_NONE,    // la PK de customer es string, así que dejamos 0 aquí
+                ENTITY_ID_NONE,
                 null,
                 afterJson
         );

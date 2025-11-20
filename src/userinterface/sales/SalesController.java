@@ -37,6 +37,13 @@ public class SalesController {
     @FXML private TextField TxtTaxes;
     @FXML private TextField TxtTotal;
 
+    // ==== NUEVOS CAMPOS DETALLE VEHÍCULO ====
+    @FXML private TextField TxtVehicleMake;
+    @FXML private TextField TxtVehicleModel;
+    @FXML private TextField TxtVehicleColor;
+    @FXML private TextField TxtVehicleYear;
+    // ========================================
+
     @FXML private TextField TxtSearchSale;
     @FXML private ComboBox<SaleStatus> CmbStatusFilter;
 
@@ -122,13 +129,14 @@ public class SalesController {
         TxtDiscount.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
         TxtTaxes.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
 
-        // Cuando el campo de ID vehículo pierda el foco, traer el precio
+        // Cuando el campo de ID vehículo pierda el foco, traer el precio y detalles
         TxtVehicleId.focusedProperty().addListener((obs, oldFocus, newFocus) -> {
             if (!newFocus) { // perdió el foco
                 onVehicleIdChanged();
             }
         });
     }
+
     private String safe(String v) {
         return v == null ? "" : v;
     }
@@ -136,6 +144,37 @@ public class SalesController {
     private String safeDec(BigDecimal v) {
         return v == null ? "" : v.toPlainString();
     }
+
+    // ==== helpers para detalle del vehículo ====
+    private void clearVehicleFields() {
+        if (TxtVehicleMake != null) TxtVehicleMake.clear();
+        if (TxtVehicleModel != null) TxtVehicleModel.clear();
+        if (TxtVehicleColor != null) TxtVehicleColor.clear();
+        if (TxtVehicleYear != null) TxtVehicleYear.clear();
+    }
+
+    private void fillVehicleFields(VehicleDTO vehicle) {
+        if (vehicle == null) {
+            clearVehicleFields();
+            return;
+        }
+
+        if (TxtVehicleMake != null) {
+            TxtVehicleMake.setText(safe(vehicle.getMake()));
+        }
+        if (TxtVehicleModel != null) {
+            TxtVehicleModel.setText(safe(vehicle.getModel()));
+        }
+        if (TxtVehicleColor != null) {
+            TxtVehicleColor.setText(safe(vehicle.getColor()));
+        }
+        if (TxtVehicleYear != null) {
+            TxtVehicleYear.setText(
+                    vehicle.getModelYear() == null ? "" : vehicle.getModelYear().toString()
+            );
+        }
+    }
+    // ===========================================
 
     private void onSaleSelected(SaleDTO sale) {
         if (sale == null) {
@@ -145,7 +184,8 @@ public class SalesController {
         }
 
         TxtFolio.setText(safe(sale.getFolio()));
-        TxtVehicleId.setText(String.valueOf(sale.getVehicleId()));
+        TxtVehicleId.setText(
+                sale.getVehicleId() == null ? "" : String.valueOf(sale.getVehicleId()));
         TxtCostumerNumber.setText(safe(sale.getCostumerNumber()));
         TxtSubtotal.setText(safeDec(sale.getSubtotal()));
 
@@ -168,6 +208,18 @@ public class SalesController {
         TxtStatus.setText(
                 sale.getStatus() == null ? "" : sale.getStatus().name()
         );
+
+        // Cargar detalles del vehículo al seleccionar la venta
+        try {
+            if (sale.getVehicleId() != null) {
+                VehicleDTO vehicle = vehicleDao.findVehicleById(sale.getVehicleId());
+                fillVehicleFields(vehicle);
+            } else {
+                clearVehicleFields();
+            }
+        } catch (SQLException | IOException ex) {
+            clearVehicleFields();
+        }
 
         setFormDisabled(!isAdmin);
     }
@@ -202,6 +254,7 @@ public class SalesController {
         if (text == null || text.trim().isEmpty()) {
             TxtSubtotal.clear();
             TxtTotal.clear();
+            clearVehicleFields();
             return;
         }
 
@@ -215,6 +268,7 @@ public class SalesController {
                 showError("No se pudo consultar el vehículo: " + ex.getMessage());
                 TxtSubtotal.clear();
                 TxtTotal.clear();
+                clearVehicleFields();
                 return;
             }
 
@@ -222,6 +276,7 @@ public class SalesController {
                 showError("El vehículo con ID " + vehicleId + " no existe.");
                 TxtSubtotal.clear();
                 TxtTotal.clear();
+                clearVehicleFields();
                 return;
             }
 
@@ -229,8 +284,12 @@ public class SalesController {
                 showError("El vehículo con ID " + vehicleId + " no tiene precio configurado.");
                 TxtSubtotal.clear();
                 TxtTotal.clear();
+                clearVehicleFields();
                 return;
             }
+
+            // Llenar campos de detalle del vehículo
+            fillVehicleFields(vehicle);
 
             // Subtotal = precio del vehículo
             TxtSubtotal.setText(vehicle.getPrice().toPlainString());
@@ -242,6 +301,7 @@ public class SalesController {
             showError(ex.getMessage());
             TxtSubtotal.clear();
             TxtTotal.clear();
+            clearVehicleFields();
         }
     }
 
@@ -251,6 +311,12 @@ public class SalesController {
         TxtTotal.setDisable(true);
         TxtStatus.setDisable(true);
         TxtFolio.setDisable(true);
+
+        // Los detalles del vehículo solo son de lectura
+        if (TxtVehicleMake != null) TxtVehicleMake.setDisable(true);
+        if (TxtVehicleModel != null) TxtVehicleModel.setDisable(true);
+        if (TxtVehicleColor != null) TxtVehicleColor.setDisable(true);
+        if (TxtVehicleYear != null) TxtVehicleYear.setDisable(true);
 
         if (disabled) {
             TxtVehicleId.setDisable(true);
@@ -519,11 +585,9 @@ public class SalesController {
         TxtTaxes.clear();
         TxtTotal.clear();
         TxtStatus.clear();
+        clearVehicleFields();
     }
 
-    // ======================
-    //  Helpers parse / validación
-    // ======================
     private BigDecimal parseMoney(String text, String field) {
         try {
             return new BigDecimal(text.trim());

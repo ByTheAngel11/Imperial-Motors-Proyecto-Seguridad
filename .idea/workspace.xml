@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/InventoryMovementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/InventoryMovementDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AuditLogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AuditLogDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/PurchaseOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/PurchaseOrderDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/DAO/SaleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/SaleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DTO/AuditAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DTO/AuditAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/costumers/CustomerFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomerFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/login/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/users/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/users/UsersController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
