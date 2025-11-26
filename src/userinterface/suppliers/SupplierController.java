@@ -45,6 +45,8 @@ public class SupplierController {
     @FXML private Button BtnSaveSupplier;
     @FXML private Button BtnDeleteSupplier;
 
+    @FXML private ComboBox<String> CmbStatusFilter;
+
     private final SupplierDAO supplierDao = new SupplierDAO();
     private final ObservableList<SupplierDTO> allSuppliers = FXCollections.observableArrayList();
 
@@ -63,6 +65,7 @@ public class SupplierController {
         configureTableColumns();
         configureSelectionListener();
         configureSearchFilter();
+        configureStatusFilter();
 
         clearForm();
         setFormDisabled(true);
@@ -121,6 +124,16 @@ public class SupplierController {
         TxtStatus.setText(Boolean.TRUE.equals(supplier.getActive()) ? "Activo" : "Inactivo");
 
         setFormDisabled(!isAdmin);
+    }
+    private void configureStatusFilter() {
+        if (CmbStatusFilter == null) {
+            return;
+        }
+
+        CmbStatusFilter.getItems().setAll("Activos", "Inactivos", "Todos");
+        CmbStatusFilter.getSelectionModel().select("Activos"); // comportamiento actual por defecto
+
+        CmbStatusFilter.valueProperty().addListener((obs, o, n) -> applyFilter());
     }
 
     private void setFormDisabled(boolean disabled) {
@@ -287,7 +300,7 @@ public class SupplierController {
 
     private void reloadSuppliersTable() {
         try {
-            List<SupplierDTO> suppliers = supplierDao.getAllActiveSuppliers();
+            List<SupplierDTO> suppliers = supplierDao.getAllSuppliers(); // antes: getAllActiveSuppliers()
             allSuppliers.setAll(suppliers);
             applyFilter();
         } catch (SQLException ex) {
@@ -299,7 +312,28 @@ public class SupplierController {
         String sText = TxtSearchSupplier.getText();
         final String search = (sText == null) ? "" : sText.trim().toLowerCase(Locale.ROOT);
 
+        String statusFilter = (CmbStatusFilter == null) ? "Activos" : CmbStatusFilter.getValue();
+        if (statusFilter == null || statusFilter.isBlank()) {
+            statusFilter = "Activos";
+        }
+
+        final String finalStatusFilter = statusFilter;
+
         List<SupplierDTO> filtered = allSuppliers.stream()
+                // filtro por estado
+                .filter(s -> {
+                    boolean isActive = Boolean.TRUE.equals(s.getActive());
+
+                    switch (finalStatusFilter) {
+                        case "Activos":
+                            return isActive;
+                        case "Inactivos":
+                            return !isActive;
+                        case "Todos":
+                        default:
+                            return true;
+                    }
+                })
                 .filter(s -> {
                     if (search.isEmpty()) {
                         return true;

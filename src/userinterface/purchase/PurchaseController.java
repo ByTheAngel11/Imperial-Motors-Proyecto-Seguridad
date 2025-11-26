@@ -9,8 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import logic.DAO.PurchaseOrderDAO;
+import logic.DAO.SupplierDAO;
 import logic.DTO.PurchaseOrderDTO;
 import logic.DTO.PurchaseStatus;
+import logic.DTO.SupplierDTO;
 import utilities.SessionManager;
 
 import java.io.IOException;
@@ -53,6 +55,7 @@ public class PurchaseController {
     @FXML private Button BtnSaveChanges;
 
     private final PurchaseOrderDAO purchaseOrderDao = new PurchaseOrderDAO();
+    private final SupplierDAO supplierDao = new SupplierDAO();
     private final ObservableList<PurchaseOrderDTO> allPurchases = FXCollections.observableArrayList();
 
     private boolean isAdmin;
@@ -378,16 +381,37 @@ public class PurchaseController {
                 showError("No puedes modificar una compra ya cancelada");
                 return;
             }
+
             String supplierText = TxtSupplierId.getText();
             if (supplierText == null || supplierText.trim().isEmpty()) {
                 showError("El ID de proveedor no puede estar vacío.");
                 return;
             }
+
             Long supplierId;
             try {
                 supplierId = Long.parseLong(supplierText.trim());
             } catch (NumberFormatException ex) {
                 showError("El ID de proveedor debe ser numérico.");
+                return;
+            }
+
+            // Validar proveedor existente y activo
+            SupplierDTO supplier;
+            try {
+                supplier = supplierDao.findSupplierById(supplierId);
+            } catch (SQLException ex) {
+                showError("No se pudo consultar el proveedor: " + ex.getMessage());
+                return;
+            }
+
+            if (supplier == null || supplier.getSupplierId() == null) {
+                showError("El proveedor indicado no existe.");
+                return;
+            }
+
+            if (Boolean.FALSE.equals(supplier.getActive())) {
+                showError("No se pueden registrar o modificar compras con un proveedor inactivo.");
                 return;
             }
 
@@ -416,7 +440,7 @@ public class PurchaseController {
                 return;
             }
 
-            // Aplicar cambios al DTO seleccionado
+            // Actualizar DTO
             selected.setSupplierId(supplierId);
             selected.setExpectedDate(expected);
             selected.setSubtotal(subtotal);

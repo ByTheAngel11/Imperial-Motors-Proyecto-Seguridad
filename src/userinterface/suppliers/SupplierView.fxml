@@ -37,8 +37,12 @@
                            promptText="Buscar por nombre, RFC, contacto, teléfono o email..."
                            styleClass="inv-search-field"
                            HBox.hgrow="ALWAYS"/>
-            </HBox>
 
+                <ComboBox fx:id="CmbStatusFilter"
+                          prefWidth="180"
+                          promptText="Estado proveedor"
+                          styleClass="inv-filter"/>
+            </HBox>
             <BorderPane prefWidth="0"
                         styleClass="inv-table-card"
                         VBox.vgrow="ALWAYS">

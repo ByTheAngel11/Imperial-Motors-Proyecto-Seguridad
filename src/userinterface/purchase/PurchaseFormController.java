@@ -4,9 +4,11 @@ import dataaccess.ConnectionDataBase;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import logic.DAO.PurchaseOrderDAO;
+import logic.DAO.SupplierDAO;
 import logic.DTO.PurchaseOrderDTO;
 import logic.DTO.PurchaseOrderItemDTO;
 import logic.DTO.PurchaseStatus;
+import logic.DTO.SupplierDTO;
 import utilities.SessionManager;
 
 import java.math.BigDecimal;
@@ -37,6 +39,7 @@ public class PurchaseFormController {
     @FXML private Button BtnCancel;
 
     private final PurchaseOrderDAO purchaseOrderDao = new PurchaseOrderDAO();
+    private final SupplierDAO supplierDao = new SupplierDAO();
 
     private Runnable onSaveCallback;
     private Runnable onCloseCallback;
@@ -97,6 +100,33 @@ public class PurchaseFormController {
             BigDecimal agreedPrice = parseMoney(TxtAgreedPrice.getText(), "Precio acordado");
 
             LocalDate expected = DpExpectedDate.getValue();
+            if (expected == null) {
+                showError("La fecha esperada es obligatoria.");
+                return;
+            }
+            if (expected.isBefore(LocalDate.now())) {
+                showError("La fecha esperada no puede ser anterior a hoy.");
+                return;
+            }
+
+            // Validar proveedor existente y activo
+            SupplierDTO supplier;
+            try {
+                supplier = supplierDao.findSupplierById(supplierId);
+            } catch (SQLException ex) {
+                showError("No se pudo consultar el proveedor: " + ex.getMessage());
+                return;
+            }
+
+            if (supplier == null || supplier.getSupplierId() == null) {
+                showError("El proveedor indicado no existe.");
+                return;
+            }
+
+            if (Boolean.FALSE.equals(supplier.getActive())) {
+                showError("No se pueden registrar compras con un proveedor inactivo.");
+                return;
+            }
 
             // 1) Crear vehículo y obtener su ID
             long vehicleId = createVehicleFromForm(

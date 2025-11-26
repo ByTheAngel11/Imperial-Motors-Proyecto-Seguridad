@@ -43,6 +43,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import logic.DAO.SupplierDAO;
+import logic.DTO.SupplierDTO;
 
 import java.io.File;
 
@@ -66,6 +68,7 @@ public class SalesController {
     @FXML private TextField TxtVehicleColor;
     @FXML private TextField TxtVehicleYear;
 
+    @FXML private TextField TxtSupplierId;
     @FXML private TextField TxtSearchSale;
     @FXML private ComboBox<SaleStatus> CmbStatusFilter;
 
@@ -87,6 +90,7 @@ public class SalesController {
 
     private final SaleDAO saleDao = new SaleDAO();
     private final VehicleDAO vehicleDao = new VehicleDAO();
+    private final SupplierDAO supplierDao = new SupplierDAO();
 
     private static final String SALES_REPORT_DIR_NAME = "ImperialReports";
     private static final String SALES_REPORT_FILE_PREFIX = "reporte_ventas_";

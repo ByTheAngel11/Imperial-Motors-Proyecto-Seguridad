@@ -28,11 +28,6 @@ public class SupplierDAO {
                     "is_active = ?, updated_at = NOW() " +
                     "WHERE supplier_id = ? AND deleted_at IS NULL";
 
-    // “Eliminar proveedor” = ponerlo inactivo
-    private static final String LOGICAL_DELETE_SUPPLIER_SQL =
-            "UPDATE supplier SET is_active = ?, updated_at = NOW() " +
-                    "WHERE supplier_id = ? AND deleted_at IS NULL";
-
     private static final String SELECT_SUPPLIER_BY_ID_SQL =
             "SELECT " + BASE_COLUMNS + " FROM supplier WHERE supplier_id = ?";
 
@@ -57,13 +52,20 @@ public class SupplierDAO {
                     "LOWER(email) LIKE ?" +
                     ") ORDER BY legal_name";
 
-    // Unicidad
     private static final String EXISTS_RFC_SQL_BASE =
             "SELECT 1 FROM supplier WHERE rfc = ? AND deleted_at IS NULL";
     private static final String EXISTS_PHONE_SQL_BASE =
             "SELECT 1 FROM supplier WHERE phone = ? AND deleted_at IS NULL";
     private static final String EXISTS_EMAIL_SQL_BASE =
             "SELECT 1 FROM supplier WHERE email = ? AND deleted_at IS NULL";
+    private static final String LOGICAL_DELETE_SUPPLIER_SQL =
+            "UPDATE supplier SET is_active = ?, updated_at = NOW(), deleted_at = NOW() " +
+                    "WHERE supplier_id = ? AND deleted_at IS NULL";
+    // SupplierDAO
+
+    private static final String SELECT_ALL_SUPPLIERS_SQL =
+            "SELECT " + BASE_COLUMNS + " FROM supplier " +
+                    "ORDER BY legal_name";
 
     public void createSupplier(SupplierDTO supplier) throws SQLException {
         if (supplier == null) {
@@ -89,6 +91,20 @@ public class SupplierDAO {
                 }
             }
         }
+    }
+    public List<SupplierDTO> getAllSuppliers() throws SQLException {
+        List<SupplierDTO> suppliers = new ArrayList<>();
+
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SUPPLIERS_SQL);
+             ResultSet rs = statement.executeQuery()) {
+
+            while (rs.next()) {
+                suppliers.add(mapRowToSupplier(rs));
+            }
+        }
+
+        return suppliers;
     }
 
     public void updateSupplier(SupplierDTO supplier) throws SQLException {
