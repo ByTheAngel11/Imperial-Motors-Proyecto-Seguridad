@@ -46,7 +46,10 @@
                     </items>
                 </ComboBox>
 
-                <Button fx:id="btnNew" styleClass="inv-primary-button" text="+  Agregar Auto" onAction="#onAddVehicle"/>
+                <Button fx:id="btnRefresh"
+                        styleClass="inv-primary-button"
+                        text="⟳  Actualizar"
+                        onAction="#onRefresh"/>
 
                 <!-- Se mantienen para no romper nada, pero ocultos -->
                 <Button fx:id="btnEdit" managed="false" visible="false" />

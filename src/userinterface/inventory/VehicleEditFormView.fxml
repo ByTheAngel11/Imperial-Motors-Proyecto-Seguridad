@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="RootPane"
+            fx:controller="userinterface.inventory.VehicleEditFormController"
+            stylesheets="@/resources/styles/vehicle.css">
+
+    <children>
+        <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                   AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+            <children>
+                <VBox spacing="24" alignment="TOP_CENTER">
+
+                    <children>
+
+                        <VBox spacing="24"
+                              prefWidth="1150"
+                              styleClass="add-vehicle-card">
+
+                            <children>
+
+                                <Label fx:id="LblTitle"
+                                       text="Editar vehículo"
+                                       styleClass="add-vehicle-title"/>
+
+                                <GridPane hgap="40" vgap="18">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="50"/>
+                                        <ColumnConstraints percentWidth="50"/>
+                                    </columnConstraints>
+
+                                    <!-- ID vehículo -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="ID vehículo" styleClass="form-label"/>
+                                            <TextField fx:id="TxtVehicleId"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- VIN (solo lectura) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="VIN" styleClass="form-label"/>
+                                            <TextField fx:id="TxtVin"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Marca (solo lectura) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="Marca" styleClass="form-label"/>
+                                            <TextField fx:id="TxtMake"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Modelo (solo lectura) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="Modelo" styleClass="form-label"/>
+                                            <TextField fx:id="TxtModel"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Año (solo lectura) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="2" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="Año" styleClass="form-label"/>
+                                            <TextField fx:id="TxtYear"
+                                                       styleClass="form-field form-field-disabled"
+                                                       editable="false"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Color (editable) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="Color" styleClass="form-label"/>
+                                            <TextField fx:id="TxtColor"
+                                                       styleClass="form-field"
+                                                       promptText="Color visible del vehículo"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Kilometraje (editable) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="3" GridPane.columnIndex="0">
+                                        <children>
+                                            <Label text="Kilometraje (km)" styleClass="form-label"/>
+                                            <TextField fx:id="TxtMileageKm"
+                                                       styleClass="form-field"
+                                                       promptText="0"/>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- Precio (editable) -->
+                                    <VBox spacing="6"
+                                          GridPane.rowIndex="3" GridPane.columnIndex="1">
+                                        <children>
+                                            <Label text="Precio" styleClass="form-label"/>
+                                            <TextField fx:id="TxtPrice"
+                                                       styleClass="form-field"
+                                                       promptText="0.00"/>
+                                        </children>
+                                    </VBox>
+
+                                </GridPane>
+
+                                <Separator/>
+
+                                <HBox spacing="12" alignment="CENTER_RIGHT">
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Button fx:id="BtnCancel" text="Cancelar"
+                                            onAction="#onCancel"
+                                            styleClass="btn-secondary"/>
+                                    <Button fx:id="BtnSave" text="Guardar"
+                                            onAction="#onSave"
+                                            styleClass="btn-primary"/>
+                                </HBox>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </VBox>
+
+            </children>
+        </StackPane>
+
+    </children>
+</AnchorPane>

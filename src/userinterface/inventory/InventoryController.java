@@ -9,11 +9,18 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import logic.DAO.InventoryMovementDAO;
 import logic.DAO.VehicleDAO;
+import logic.DTO.InventoryMovementDTO;
+import logic.DTO.InventoryMovementType;
 import logic.DTO.VehicleDTO;
 import logic.DTO.VehicleStatus;
+import logic.DTO.AccountRole;
+import utilities.SessionManager;
+
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -29,13 +36,16 @@ public class InventoryController {
     @FXML private TableColumn<VehicleTableRow, String> colPrice;
     @FXML private TableColumn<VehicleTableRow, String> colStatus;
     @FXML private TableColumn<VehicleTableRow, VehicleTableRow> colActions;
+
     @FXML private AnchorPane contentArea;
     @FXML private TextField txtSearch;
     @FXML private ComboBox<String> cmbStatusFilter;
     @FXML private ComboBox<String> cmbBrandFilter;
+    @FXML private Button btnRefresh;
 
     private final ObservableList<VehicleTableRow> masterVehicles = FXCollections.observableArrayList();
     private final VehicleDAO vehicleDAO = new VehicleDAO();
+    private final InventoryMovementDAO inventoryMovementDAO = new InventoryMovementDAO();
 
     @FXML
     public void initialize() {
@@ -59,6 +69,8 @@ public class InventoryController {
                     cargarVehiculos();
                     aplicarFiltros();
                 });
+
+        configurarAccesoPorRol();
     }
 
     private void configurarTabla() {
@@ -99,6 +111,7 @@ public class InventoryController {
                     case "RESERVADO"  -> pill.getStyleClass().add("status-reservado");
                     case "VENDIDO"    -> pill.getStyleClass().add("status-vendido");
                     case "BAJA"       -> pill.getStyleClass().add("status-baja");
+                    default -> { }
                 }
 
                 setGraphic(pill);
@@ -117,7 +130,6 @@ public class InventoryController {
             private final HBox box = new HBox(8, btnView, btnEditRow, btnDeleteRow);
 
             {
-                // Estilos INLINE para evitar líos con el CSS
                 String baseStyle =
                         "-fx-background-color: transparent;" +
                                 "-fx-border-color: transparent;" +
@@ -131,19 +143,34 @@ public class InventoryController {
                 btnEditRow.setStyle(baseStyle);
                 btnDeleteRow.setStyle(baseStyle + "-fx-text-fill: #DC2626;");
 
+                boolean isAdmin = isCurrentUserAdmin();
+                if (!isAdmin) {
+                    // Vendedor: solo puede ver, no editar ni dar de baja
+                    btnEditRow.setVisible(false);
+                    btnEditRow.setManaged(false);
+                    btnDeleteRow.setVisible(false);
+                    btnDeleteRow.setManaged(false);
+                }
+
                 btnView.setOnAction(e -> {
                     VehicleTableRow row = getItem();
-                    if (row != null) onViewVehicle(row.getVehicle());
+                    if (row != null) {
+                        onViewVehicle(row.getVehicle());
+                    }
                 });
 
                 btnEditRow.setOnAction(e -> {
                     VehicleTableRow row = getItem();
-                    if (row != null) onEditVehicle(row.getVehicle());
+                    if (row != null) {
+                        onEditVehicle(row.getVehicle());
+                    }
                 });
 
                 btnDeleteRow.setOnAction(e -> {
                     VehicleTableRow row = getItem();
-                    if (row != null) onDeleteVehicle(row.getVehicle());
+                    if (row != null) {
+                        onDeleteVehicle(row.getVehicle());
+                    }
                 });
             }
 
@@ -237,47 +264,180 @@ public class InventoryController {
         tblVehicle.setItems(FXCollections.observableArrayList(filtrados));
     }
 
-    // ---------- Acciones de los botones de la columna Acciones ----------
 
     private void onViewVehicle(VehicleDTO v) {
-        mostrarInfo("Ver vehículo",
-                "Vehículo: " + safe(v.getMake()) + " " + safe(v.getModel()) +
-                        "\nVIN: " + safe(v.getVin()));
+        String id        = v.getVehicleId()  != null ? v.getVehicleId().toString() : "-";
+        String make      = safe(v.getMake());
+        String model     = safe(v.getModel());
+        String year      = v.getModelYear()  != null ? v.getModelYear().toString() : "-";
+        String color     = safe(v.getColor());
+        String vin       = safe(v.getVin());
+        String mileage   = v.getMileageKm()  != null ? v.getMileageKm() + " km" : "-";
+        String price     = (v.getPrice()     != null ? "$" + v.getPrice().toPlainString() : "-");
+        String status    = v.getStatus()     != null ? v.getStatus().name() : "-";
+
+        String mensaje =
+                "ID: " + id + "\n" +
+                        "Marca: " + make + "\n" +
+                        "Modelo: " + model + "\n" +
+                        "Año: " + year + "\n" +
+                        "Color: " + color + "\n" +
+                        "VIN: " + vin + "\n" +
+                        "Kilometraje: " + mileage + "\n" +
+                        "Precio: " + price + "\n" +
+                        "Estado: " + status;
+
+        mostrarInfo("Ver vehículo", mensaje);
     }
 
     private void onEditVehicle(VehicleDTO v) {
-        mostrarInfo("Editar vehículo",
-                "Aquí abrirías la ventana de edición para el vehículo ID " + v.getVehicleId());
+        if (!isCurrentUserAdmin()) {
+            mostrarError("Acceso denegado",
+                    "Solo el administrador puede editar datos de inventario.");
+            return;
+        }
+
+        if (v.getStatus() == VehicleStatus.VENDIDO || v.getStatus() == VehicleStatus.BAJA) {
+            mostrarError("Operación no permitida",
+                    "No puedes editar vehículos vendidos o dados de baja.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/userinterface/inventory/VehicleEditFormView.fxml"));
+
+            AnchorPane form = loader.load();
+            VehicleEditFormController controller = loader.getController();
+
+            controller.setVehicleToEdit(v);
+            controller.setOnSaveCallback(() -> {
+                cargarVehiculos();
+                aplicarFiltros();
+                showMainView();
+            });
+            controller.setOnCloseCallback(this::showMainView);
+
+            contentArea.getChildren().setAll(form);
+            AnchorPane.setTopAnchor(form, 0.0);
+            AnchorPane.setBottomAnchor(form, 0.0);
+            AnchorPane.setLeftAnchor(form, 0.0);
+            AnchorPane.setRightAnchor(form, 0.0);
+
+        } catch (IOException ex) {
+            mostrarError("Error al cargar formulario de edición", ex.getMessage());
+        }
     }
 
     private void onDeleteVehicle(VehicleDTO v) {
-        mostrarInfo("Eliminar vehículo",
-                "Aquí podrías pedir confirmación para dar de baja el vehículo ID " + v.getVehicleId());
+        if (!isCurrentUserAdmin()) {
+            mostrarError("Acceso denegado",
+                    "Solo el administrador puede dar de baja vehículos del inventario.");
+            return;
+        }
+
+        if (v.getVehicleId() == null) {
+            mostrarError("Vehículo inválido", "No se puede dar de baja un vehículo sin ID.");
+            return;
+        }
+        if (v.getStatus() == VehicleStatus.VENDIDO) {
+            mostrarError("Operación no permitida",
+                    "No puedes dar de baja un vehículo que ya fue vendido.");
+            return;
+        }
+        if (v.getStatus() == VehicleStatus.BAJA) {
+            mostrarError("Operación no permitida",
+                    "El vehículo ya está dado de baja.");
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Dar de baja vehículo");
+        confirm.setHeaderText(null);
+        confirm.setContentText("¿Seguro que deseas dar de baja el vehículo:\n" +
+                safe(v.getMake()) + " " + safe(v.getModel()) + "\nVIN: " + safe(v.getVin()) + "?");
+
+        confirm.showAndWait().ifPresent(result -> {
+            if (result == ButtonType.OK) {
+                try {
+                    marcarVehiculoComoBaja(v);
+                    mostrarInfo("Vehículo dado de baja",
+                            "El vehículo se marcó como BAJA y se registró el movimiento de inventario.");
+                    cargarVehiculos();
+                    aplicarFiltros();
+                } catch (SQLException | IOException ex) {
+                    mostrarError("Error al dar de baja",
+                            "Ocurrió un error al dar de baja el vehículo:\n" + ex.getMessage());
+                }
+            }
+        });
     }
 
-    public void onAddVehicle() {
-        loadPage("/userinterface/vehicle/addVehicle.fxml");
+    private void marcarVehiculoComoBaja(VehicleDTO v) throws SQLException, IOException {
+        Long vehicleId = v.getVehicleId();
+        if (vehicleId == null) {
+            throw new IllegalArgumentException("vehicleId requerido para marcar BAJA.");
+        }
+
+        vehicleDAO.updateVehicleStatus(vehicleId, VehicleStatus.BAJA);
+
+        InventoryMovementDTO movement = new InventoryMovementDTO();
+        movement.setVehicleId(vehicleId);
+        movement.setType(InventoryMovementType.BAJA);
+        movement.setRefTable("vehicle");
+        movement.setRefId(vehicleId);
+        movement.setNote("Baja desde módulo de inventario.");
+        movement.setAccountId(SessionManager.getCurrentAccountId());
+        movement.setCreatedAt(LocalDateTime.now());
+
+        inventoryMovementDAO.insertInventoryMovement(movement);
+    }
+
+    // ---------- Botón Refrescar ----------
+
+    @FXML
+    private void onRefresh() {
+        cargarVehiculos();
+        aplicarFiltros();
     }
 
     // ---------- Helpers ----------
 
-    private void loadPage(String resourcePath) {
+    private void configurarAccesoPorRol() {
+        AccountRole role = SessionManager.getCurrentRole();
+        if (role == null) {
+            return;
+        }
+
+        if (!isCurrentUserAdmin()) {
+            colActions.setText("Detalles");
+        }
+    }
+
+    private boolean isCurrentUserAdmin() {
+        AccountRole role = SessionManager.getCurrentRole();
+        if (role == null) {
+            return false;
+        }
+
+        return role == AccountRole.ADMINISTRATOR;
+    }
+
+    private void showMainView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(resourcePath));
-            Node node = loader.load();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/userinterface/inventory/Inventory.fxml"));
 
-            contentArea.getChildren().setAll(node);
-            AnchorPane.setTopAnchor(node, 0.0);
-            AnchorPane.setRightAnchor(node, 0.0);
-            AnchorPane.setBottomAnchor(node, 0.0);
-            AnchorPane.setLeftAnchor(node, 0.0);
+            AnchorPane main = loader.load();
+            contentArea.getChildren().setAll(main);
 
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al cargar módulo");
-            alert.setHeaderText(null);
-            alert.setContentText("No se pudo cargar: " + resourcePath + "\n" + e.getMessage());
-            alert.showAndWait();
+            AnchorPane.setTopAnchor(main, 0.0);
+            AnchorPane.setBottomAnchor(main, 0.0);
+            AnchorPane.setLeftAnchor(main, 0.0);
+            AnchorPane.setRightAnchor(main, 0.0);
+
+        } catch (IOException ex) {
+            mostrarError("Error al regresar a la vista de inventario", ex.getMessage());
         }
     }
 

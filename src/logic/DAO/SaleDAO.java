@@ -9,7 +9,7 @@ import logic.DTO.VehicleStatus;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +45,10 @@ public class SaleDAO {
 
     private static final String SELECT_SALE_BY_ID_SQL =
             SELECT_ALL_SALES_SQL + " WHERE sale_id = ?";
+
+    // NUEVO: seleccionar entre fechas (desde created_at)
+    private static final String SELECT_SALES_BETWEEN_SQL =
+            SELECT_ALL_SALES_SQL + " WHERE created_at >= ? AND created_at < ?";
 
     private static final String UPDATE_SALE_SQL =
             "UPDATE sale SET " +
@@ -103,7 +107,6 @@ public class SaleDAO {
 
                 sale.setCreatedAt(current.getCreatedAt());
 
-                // --- Fechas y motivo según nuevo estado ---
                 if (newStatus == SaleStatus.ANULADA) {
                     sale.setAnnulledAt(now);
                     if (sale.getAnnulReason() == null || sale.getAnnulReason().trim().isEmpty()) {
@@ -135,7 +138,6 @@ public class SaleDAO {
                     insertInventoryAdjustmentMovement(connection, sale);
                 }
 
-                // 3) Audit log
                 insertAuditLog(
                         connection,
                         sale.getSellerAccountId(),
@@ -168,6 +170,62 @@ public class SaleDAO {
 
         return sales;
     }
+
+    // ===== NUEVO: reportes por rango relativo a la fecha actual =====
+
+    public List<SaleDTO> getSalesForCurrentWeek() throws SQLException {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
+        LocalDate endOfWeek = today.with(DayOfWeek.SUNDAY);
+
+        LocalDateTime from = startOfWeek.atStartOfDay();
+        LocalDateTime to = endOfWeek.plusDays(1).atStartOfDay(); // exclusivo
+
+        return getSalesBetween(from, to);
+    }
+
+    public List<SaleDTO> getSalesForCurrentMonth() throws SQLException {
+        LocalDate today = LocalDate.now();
+        LocalDate firstDay = today.withDayOfMonth(1);
+        LocalDate firstDayNextMonth = firstDay.plusMonths(1);
+
+        LocalDateTime from = firstDay.atStartOfDay();
+        LocalDateTime to = firstDayNextMonth.atStartOfDay();
+
+        return getSalesBetween(from, to);
+    }
+
+    public List<SaleDTO> getSalesForCurrentYear() throws SQLException {
+        LocalDate today = LocalDate.now();
+        LocalDate firstDay = today.withDayOfYear(1);
+        LocalDate firstDayNextYear = firstDay.plusYears(1);
+
+        LocalDateTime from = firstDay.atStartOfDay();
+        LocalDateTime to = firstDayNextYear.atStartOfDay();
+
+        return getSalesBetween(from, to);
+    }
+
+    public List<SaleDTO> getSalesBetween(LocalDateTime from, LocalDateTime to) throws SQLException {
+        List<SaleDTO> sales = new ArrayList<>();
+
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_SALES_BETWEEN_SQL)) {
+
+            statement.setObject(1, from);
+            statement.setObject(2, to);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    sales.add(mapResultSetToSaleDTO(rs));
+                }
+            }
+        }
+
+        return sales;
+    }
+
+    // ================================================================
 
     private void validateSaleAmounts(SaleDTO sale) {
         BigDecimal subtotal = nullToZero(sale.getSubtotal());
@@ -255,9 +313,6 @@ public class SaleDAO {
         }
     }
 
-    // ===== Movimientos de inventario =====
-
-    // Alta por venta nueva
     private void insertInventoryMovementSale(Connection connection, SaleDTO sale, long saleId) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_INVENTORY_MOVEMENT_SQL)) {
             statement.setLong(1, sale.getVehicleId());
@@ -270,7 +325,6 @@ public class SaleDAO {
         }
     }
 
-    // Liberación por anulación
     private void insertInventoryLiberationMovement(Connection connection, SaleDTO sale) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_INVENTORY_MOVEMENT_SQL)) {
             statement.setLong(1, sale.getVehicleId());
@@ -283,7 +337,6 @@ public class SaleDAO {
         }
     }
 
-    // AJUSTE por guardar cambios de una venta
     private void insertInventoryAdjustmentMovement(Connection connection, SaleDTO sale) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_INVENTORY_MOVEMENT_SQL)) {
             statement.setLong(1, sale.getVehicleId());
@@ -295,8 +348,6 @@ public class SaleDAO {
             statement.executeUpdate();
         }
     }
-
-    // ===== Audit log =====
 
     private void insertAuditLog(Connection connection, SaleDTO sale, long saleId) throws SQLException {
         String afterDataJson = buildAfterDataJson(sale);

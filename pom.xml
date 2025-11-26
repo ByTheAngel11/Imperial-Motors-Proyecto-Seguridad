@@ -21,6 +21,11 @@
     <dependencies>
         <!-- OpenJFX dependencies (add these) -->
         <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.30</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
@@ -113,6 +118,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- JUnit 5 (Engine para ejecutar) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

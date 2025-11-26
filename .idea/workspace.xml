@@ -6,10 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AuditLogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AuditLogDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/PurchaseOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/PurchaseOrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/DAO/SaleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/SaleDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/VehicleDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DTO/VehicleStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DTO/VehicleStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/inventory/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/inventory/Inventory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/inventory/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/inventory/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/purchase/PurchaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/purchase/PurchaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/sales/SalesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/sales/SalesView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +31,7 @@
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -68,6 +76,9 @@
   &quot;keyToString&quot;: {
     &quot;Application.GenerateHashes.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUtiitiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUtilitiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUtilitiesTest.sample.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.VehicleDAOTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor&quot;: &quot;Run&quot;,
     &quot;Maven.Imperial-Motors [install].executor&quot;: &quot;Run&quot;,
@@ -75,17 +86,20 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/reino/OneDrive/Desktop/Seguridad/repoProyectoImperial/Imperial-Motors-Proyecto-Seguridad/src/test/java/utilities&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/reino/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.33678162&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
@@ -99,21 +113,19 @@
       <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\views" />
       <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\controller" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="main" />
+      <recent name="utilities" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="utilities" />
+      <recent name="test" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="GenerateHashes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utilities.GenerateHashes" />
-      <module name="ImperialMotors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utilities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="Imperial-Motors" />
@@ -124,6 +136,52 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PasswordUtiitiesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Imperial-Motors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="utilities" />
+      <option name="MAIN_CLASS_NAME" value="utilities.PasswordUtiitiesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PasswordUtilitiesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Imperial-Motors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="utilities" />
+      <option name="MAIN_CLASS_NAME" value="utilities.PasswordUtilitiesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PasswordUtilitiesTest.sample" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Imperial-Motors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="utilities" />
+      <option name="MAIN_CLASS_NAME" value="utilities.PasswordUtilitiesTest" />
+      <option name="METHOD_NAME" value="sample" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -149,15 +207,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.GenerateHashes" />
+      <item itemvalue="JUnit.PasswordUtiitiesTest" />
+      <item itemvalue="JUnit.PasswordUtilitiesTest" />
+      <item itemvalue="JUnit.PasswordUtilitiesTest.sample" />
       <item itemvalue="JUnit.VehicleDAOTest" />
       <item itemvalue="JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PasswordUtilitiesTest.sample" />
+        <item itemvalue="JUnit.PasswordUtilitiesTest" />
+        <item itemvalue="JUnit.PasswordUtiitiesTest" />
         <item itemvalue="JUnit.VehicleDAOTest" />
         <item itemvalue="JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList" />
-        <item itemvalue="Application.GenerateHashes" />
       </list>
     </recent_temporary>
   </component>

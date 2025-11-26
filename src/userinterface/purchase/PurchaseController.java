@@ -322,6 +322,10 @@ public class PurchaseController {
                 showInfo("La compra ya está cancelada.");
                 return;
             }
+            if (selected.getStatus() == PurchaseStatus.RECIBIDA) {
+                showError("Una compra ya recibida no se puede cancelar");
+                return;
+            }
 
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Cancelar compra");
@@ -366,8 +370,14 @@ public class PurchaseController {
                 showError("Selecciona una compra.");
                 return;
             }
-
-            // Validar y leer proveedor
+            if (selected.getStatus() == PurchaseStatus.RECIBIDA) {
+                showError("No puedes modificar una compra ya recibida");
+                return;
+            }
+            if (selected.getStatus() == PurchaseStatus.CANCELADA) {
+                showError("No puedes modificar una compra ya cancelada");
+                return;
+            }
             String supplierText = TxtSupplierId.getText();
             if (supplierText == null || supplierText.trim().isEmpty()) {
                 showError("El ID de proveedor no puede estar vacío.");

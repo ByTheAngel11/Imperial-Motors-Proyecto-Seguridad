@@ -245,4 +245,60 @@ public class VehicleDAO {
 
         return vehicle;
     }
+    private static final String UPDATE_VEHICLE_STATUS_SQL =
+            "UPDATE vehicle SET status = ?, updated_at = NOW() WHERE vehicle_id = ?";
+
+    public void updateVehicleStatus(Long vehicleId, VehicleStatus newStatus) throws SQLException, IOException {
+        if (vehicleId == null || newStatus == null) {
+            throw new IllegalArgumentException("vehicleId y newStatus son requeridos.");
+        }
+
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_VEHICLE_STATUS_SQL)) {
+
+            statement.setString(1, newStatus.name());
+            statement.setLong(2, vehicleId);
+
+            int rows = statement.executeUpdate();
+            if (rows == 0) {
+                throw new SQLException("No se encontró vehículo con id " + vehicleId);
+            }
+        }
+    }
+    private static final String SQL_UPDATE_DETAILS =
+            "UPDATE vehicle SET color = ?, mileage_km = ?, price = ?, updated_at = NOW() " +
+                    "WHERE vehicle_id = ?";
+
+    public void updateVehicleDetails(Long vehicleId,
+                                     String color,
+                                     Integer mileageKm,
+                                     java.math.BigDecimal price) throws SQLException, IOException {
+
+        if (vehicleId == null) {
+            throw new IllegalArgumentException("vehicleId es requerido.");
+        }
+        if (price == null) {
+            throw new IllegalArgumentException("price es requerido.");
+        }
+
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DETAILS)) {
+
+            statement.setString(1, color);
+
+            if (mileageKm != null) {
+                statement.setInt(2, mileageKm);
+            } else {
+                statement.setNull(2, Types.INTEGER);
+            }
+
+            statement.setBigDecimal(3, price);
+            statement.setLong(4, vehicleId);
+
+            int rows = statement.executeUpdate();
+            if (rows == 0) {
+                throw new SQLException("No se encontró vehículo con id " + vehicleId);
+            }
+        }
+    }
 }

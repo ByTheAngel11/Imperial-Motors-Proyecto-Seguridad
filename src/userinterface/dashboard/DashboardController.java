@@ -38,8 +38,7 @@ public class DashboardController {
         loadPage("/userinterface/purchase/PurchaseView.fxml");}
     @FXML
     private void onProviders() {
-        mostrarPendiente("Proveedores");
-    }
+        loadPage("/userinterface/suppliers/SupplierView.fxml");}
 
     @FXML
     private void onReports() {

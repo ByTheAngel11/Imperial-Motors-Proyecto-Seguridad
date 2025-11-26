@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.sales.SalesReportController"
+            fx:id="rootPane"
+            stylesheets="@/styles/inventory.css"
+            styleClass="anchor-pane"
+            prefWidth="480.0"
+            prefHeight="260.0">
+
+    <children>
+        <VBox spacing="16"
+              alignment="TOP_LEFT"
+              AnchorPane.topAnchor="24.0"
+              AnchorPane.bottomAnchor="24.0"
+              AnchorPane.leftAnchor="32.0"
+              AnchorPane.rightAnchor="32.0">
+
+            <Label text="Impresión de reportes"
+                   styleClass="inv-title"/>
+
+            <Label text="Elige el tipo de reporte que deseas imprimir."/>
+
+            <VBox spacing="10">
+                <Button fx:id="btnWeek"
+                        text="Ventas de esta semana"
+                        onAction="#onPrintWeek"
+                        styleClass="inv-primary-button"
+                        maxWidth="Infinity"/>
+
+                <Button fx:id="btnMonth"
+                        text="Ventas de este mes"
+                        onAction="#onPrintMonth"
+                        styleClass="inv-primary-button"
+                        maxWidth="Infinity"/>
+
+                <Button fx:id="btnYear"
+                        text="Ventas de este año"
+                        onAction="#onPrintYear"
+                        styleClass="inv-primary-button"
+                        maxWidth="Infinity"/>
+
+                <Button fx:id="btnAll"
+                        text="Todas las ventas"
+                        onAction="#onPrintAll"
+                        styleClass="inv-primary-button"
+                        maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -18,6 +18,7 @@
               AnchorPane.leftAnchor="32.0"
               AnchorPane.rightAnchor="32.0">
 
+            <!-- Título + botón nueva venta -->
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <Label text="Ventas"
                        styleClass="inv-title"/>
@@ -30,6 +31,7 @@
                         styleClass="inv-primary-button"/>
             </HBox>
 
+            <!-- Búsqueda, filtro de estado, periodo y botón de reporte -->
             <HBox spacing="12" alignment="CENTER_LEFT">
                 <TextField fx:id="TxtSearchSale"
                            promptText="Buscar por folio, cliente o vehículo..."
@@ -40,6 +42,18 @@
                           prefWidth="180"
                           promptText="Estado de la venta"
                           styleClass="inv-filter"/>
+
+                <!-- Nuevo: periodo del reporte / filtro -->
+                <ComboBox fx:id="CmbReportRange"
+                          prefWidth="190"
+                          promptText="Periodo"
+                          styleClass="inv-filter"/>
+
+                <!-- Nuevo: botón imprimir reporte -->
+                <Button fx:id="BtnExportReport"
+                        text="Imprimir reporte de ventas"
+                        onAction="#onExportReport"
+                        styleClass="inv-primary-button"/>
             </HBox>
 
             <BorderPane prefWidth="0"

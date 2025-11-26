@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="userinterface.suppliers.SupplierController"
+            fx:id="contentArea"
+            stylesheets="@/styles/inventory.css"
+            styleClass="anchor-pane">
+
+    <children>
+        <VBox spacing="20"
+              AnchorPane.topAnchor="24.0"
+              AnchorPane.bottomAnchor="24.0"
+              AnchorPane.leftAnchor="32.0"
+              AnchorPane.rightAnchor="32.0">
+
+            <!-- Título + botón nuevo proveedor -->
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Proveedores"
+                       styleClass="inv-title"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="BtnNewSupplier"
+                        text="+ Registrar proveedor"
+                        onAction="#onNewSupplier"
+                        styleClass="inv-primary-button"/>
+            </HBox>
+
+            <!-- Búsqueda -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <TextField fx:id="TxtSearchSupplier"
+                           promptText="Buscar por nombre, RFC, contacto, teléfono o email..."
+                           styleClass="inv-search-field"
+                           HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <BorderPane prefWidth="0"
+                        styleClass="inv-table-card"
+                        VBox.vgrow="ALWAYS">
+
+                <center>
+                    <TableView fx:id="TblSuppliers">
+                        <columns>
+                            <TableColumn fx:id="ColLegalName" text="Razón social" prefWidth="220"/>
+                            <TableColumn fx:id="ColRfc" text="RFC" prefWidth="140"/>
+                            <TableColumn fx:id="ColContact" text="Contacto" prefWidth="180"/>
+                            <TableColumn fx:id="ColPhone" text="Teléfono" prefWidth="140"/>
+                            <TableColumn fx:id="ColEmail" text="Email" prefWidth="220"/>
+                            <TableColumn fx:id="ColActive" text="Estado" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </center>
+
+                <right>
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                        <content>
+                            <VBox spacing="20"
+                                  prefWidth="420"
+                                  alignment="TOP_LEFT">
+
+                                <padding>
+                                    <Insets top="24" right="24" bottom="24" left="24"/>
+                                </padding>
+
+                                <Label text="Detalle de proveedor"
+                                       styleClass="inv-title"/>
+
+                                <Separator/>
+
+                                <GridPane hgap="24" vgap="18">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="110" halignment="LEFT"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
+
+                                    <!-- FILA 0: ID proveedor -->
+                                    <Label text="ID proveedor" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtSupplierId"
+                                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 1: Razón social -->
+                                    <Label text="Razón social *" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtLegalName"
+                                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 2: RFC -->
+                                    <Label text="RFC" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtRfc"
+                                               GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 3: Contacto -->
+                                    <Label text="Nombre contacto *" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtContactName"
+                                               GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 4: Teléfono -->
+                                    <Label text="Teléfono *" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtPhone"
+                                               GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 5: Email -->
+                                    <Label text="Email" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtEmail"
+                                               GridPane.rowIndex="5" GridPane.columnIndex="1"
+                                               styleClass="inv-search-field"/>
+
+                                    <!-- FILA 6: Estado -->
+                                    <Label text="Estado" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="TxtStatus"
+                                               GridPane.rowIndex="6" GridPane.columnIndex="1"
+                                               editable="false"
+                                               styleClass="inv-search-field"/>
+                                </GridPane>
+
+                                <!-- Botones uno sobre otro -->
+                                <VBox spacing="12" alignment="CENTER_RIGHT">
+                                    <Button fx:id="BtnSaveSupplier"
+                                            text="Guardar cambios"
+                                            onAction="#onSaveSupplier"
+                                            styleClass="inv-primary-button"
+                                            maxWidth="Infinity"
+                                            prefHeight="40"/>
+
+                                    <Button fx:id="BtnDeleteSupplier"
+                                            text="Eliminar proveedor"
+                                            onAction="#onDeleteSupplier"
+                                            styleClass="inv-action-button"
+                                            maxWidth="Infinity"
+                                            prefHeight="40"/>
+                                </VBox>
+                            </VBox>
+                        </content>
+                    </ScrollPane>
+                </right>
+
+            </BorderPane>
+        </VBox>
+    </children>
+</AnchorPane>

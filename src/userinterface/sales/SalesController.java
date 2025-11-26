@@ -8,19 +8,43 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ListCell;
+
 import logic.DAO.SaleDAO;
 import logic.DAO.VehicleDAO;
 import logic.DTO.SaleDTO;
 import logic.DTO.SaleStatus;
+import logic.DTO.SalesReportRange;
 import logic.DTO.VehicleDTO;
 import utilities.SessionManager;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.File;
 
 public class SalesController {
 
@@ -37,12 +61,10 @@ public class SalesController {
     @FXML private TextField TxtTaxes;
     @FXML private TextField TxtTotal;
 
-    // ==== NUEVOS CAMPOS DETALLE VEHÍCULO ====
     @FXML private TextField TxtVehicleMake;
     @FXML private TextField TxtVehicleModel;
     @FXML private TextField TxtVehicleColor;
     @FXML private TextField TxtVehicleYear;
-    // ========================================
 
     @FXML private TextField TxtSearchSale;
     @FXML private ComboBox<SaleStatus> CmbStatusFilter;
@@ -60,9 +82,20 @@ public class SalesController {
 
     @FXML private TextField TxtStatus;
     @FXML private Button BtnAnnulSale;
+    @FXML private ComboBox<SalesReportRange> CmbReportRange;
+    @FXML private Button BtnExportReport;
 
     private final SaleDAO saleDao = new SaleDAO();
     private final VehicleDAO vehicleDao = new VehicleDAO();
+
+    private static final String SALES_REPORT_DIR_NAME = "ImperialReports";
+    private static final String SALES_REPORT_FILE_PREFIX = "reporte_ventas_";
+    private static final int LAST_DAYS_COUNT = 7;
+
+    private static final float REPORT_MARGIN_LEFT = 50f;
+    private static final float REPORT_MARGIN_TOP = 750f;
+    private static final float REPORT_LINE_HEIGHT = 16f;
+    private static final float REPORT_MIN_Y = 80f;
 
     private boolean isAdmin;
     private final ObservableList<SaleDTO> allSales = FXCollections.observableArrayList();
@@ -77,6 +110,7 @@ public class SalesController {
         configureSelectionListener();
         configureSearchFilter();
         configureDetailRecalc();
+        configureReportRange();
 
         clearForm();
         setFormDisabled(true);
@@ -124,17 +158,73 @@ public class SalesController {
     }
 
     private void configureDetailRecalc() {
-        // Recalcular total cuando cambien subtotal, descuento o impuestos
         TxtSubtotal.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
         TxtDiscount.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
         TxtTaxes.textProperty().addListener((obs, o, n) -> recalcDetailTotal());
 
-        // Cuando el campo de ID vehículo pierda el foco, traer el precio y detalles
         TxtVehicleId.focusedProperty().addListener((obs, oldFocus, newFocus) -> {
-            if (!newFocus) { // perdió el foco
+            if (!newFocus) {
                 onVehicleIdChanged();
             }
         });
+    }
+
+    private void configureReportRange() {
+        if (CmbReportRange == null) {
+            return;
+        }
+
+        // Items
+        CmbReportRange.getItems().setAll(SalesReportRange.values());
+
+        // Cómo se ven en el dropdown
+        CmbReportRange.setCellFactory(cb -> new ListCell<>() {
+            @Override
+            protected void updateItem(SalesReportRange item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(getRangeLabel(item));
+                }
+            }
+        });
+
+        // Cómo se ve el seleccionado
+        CmbReportRange.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(SalesReportRange item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText("Periodo");
+                } else {
+                    setText(getRangeLabel(item));
+                }
+            }
+        });
+
+        CmbReportRange.getSelectionModel().select(SalesReportRange.ALL);
+        CmbReportRange.valueProperty().addListener((obs, oldVal, newVal) -> applyFilter());
+    }
+
+    private String getRangeLabel(SalesReportRange range) {
+        if (range == null) {
+            return "";
+        }
+        switch (range) {
+            case ALL:
+                return "Todas las ventas";
+            case TODAY:
+                return "Hoy";
+            case LAST_7_DAYS:
+                return "Últimos 7 días";
+            case THIS_MONTH:
+                return "Este mes";
+            case THIS_YEAR:
+                return "Año actual";
+            default:
+                return "";
+        }
     }
 
     private String safe(String v) {
@@ -209,7 +299,6 @@ public class SalesController {
                 sale.getStatus() == null ? "" : sale.getStatus().name()
         );
 
-        // Cargar detalles del vehículo al seleccionar la venta
         try {
             if (sale.getVehicleId() != null) {
                 VehicleDTO vehicle = vehicleDao.findVehicleById(sale.getVehicleId());
@@ -245,7 +334,7 @@ public class SalesController {
 
             TxtTotal.setText(total.toPlainString());
         } catch (Exception ex) {
-            // Ignoramos mientras el usuario escribe (para no spamear alertas)
+            // Ignorado mientras escribe
         }
     }
 
@@ -288,13 +377,8 @@ public class SalesController {
                 return;
             }
 
-            // Llenar campos de detalle del vehículo
             fillVehicleFields(vehicle);
-
-            // Subtotal = precio del vehículo
             TxtSubtotal.setText(vehicle.getPrice().toPlainString());
-
-            // Recalcular total con el nuevo subtotal
             recalcDetailTotal();
 
         } catch (IllegalArgumentException ex) {
@@ -312,7 +396,6 @@ public class SalesController {
         TxtStatus.setDisable(true);
         TxtFolio.setDisable(true);
 
-        // Los detalles del vehículo solo son de lectura
         if (TxtVehicleMake != null) TxtVehicleMake.setDisable(true);
         if (TxtVehicleModel != null) TxtVehicleModel.setDisable(true);
         if (TxtVehicleColor != null) TxtVehicleColor.setDisable(true);
@@ -339,9 +422,6 @@ public class SalesController {
         }
     }
 
-    // =========================
-    //  Abrir formulario embebido
-    // =========================
     @FXML
     private void onNewSale() {
         try {
@@ -365,9 +445,6 @@ public class SalesController {
         }
     }
 
-    // =======================
-    //  Regresar a la vista lista
-    // =======================
     private void showMainView() {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -527,6 +604,30 @@ public class SalesController {
             showError("Error al anular la venta: " + ex.getMessage());
         }
     }
+    @FXML
+    private void onExportReport() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/userinterface/sales/SalesReportView.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Impresión de reportes");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            if (contentArea != null && contentArea.getScene() != null) {
+                stage.initOwner(contentArea.getScene().getWindow());
+            }
+
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.showAndWait();
+
+        } catch (IOException ex) {
+            showError("Error al abrir la ventana de reportes: " + ex.getMessage());
+        }
+    }
 
     @FXML
     private void onClearForm() {
@@ -535,9 +636,6 @@ public class SalesController {
         setFormDisabled(true);
     }
 
-    // ======================
-    //  Recarga + filtros
-    // ======================
     private void reloadSalesTable() {
         try {
             List<SaleDTO> sales = saleDao.getAllSales();
@@ -552,6 +650,11 @@ public class SalesController {
         SaleStatus filterStatus = CmbStatusFilter.getValue();
         String sText = TxtSearchSale.getText();
         final String search = (sText == null) ? "" : sText.trim().toLowerCase(Locale.ROOT);
+
+        SalesReportRange selectedRange =
+                (CmbReportRange == null || CmbReportRange.getValue() == null)
+                        ? SalesReportRange.ALL
+                        : CmbReportRange.getValue();
 
         List<SaleDTO> filtered = allSales.stream()
                 .filter(s -> {
@@ -571,6 +674,7 @@ public class SalesController {
                             || customer.contains(search)
                             || vehicleId.contains(search);
                 })
+                .filter(s -> isSaleInSelectedRange(s, selectedRange))
                 .collect(Collectors.toList());
 
         TblSales.setItems(FXCollections.observableArrayList(filtered));
@@ -627,6 +731,46 @@ public class SalesController {
         if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException("El campo " + name + " es obligatorio.");
         }
+    }
+
+    private boolean isSaleInSelectedRange(SaleDTO sale, SalesReportRange selectedRange) {
+        if (selectedRange == null) {
+            return true;
+        }
+
+        LocalDate today = LocalDate.now();
+        LocalDate saleDate = sale.getCreatedAt() == null
+                ? null
+                : sale.getCreatedAt().toLocalDate();
+
+        if (saleDate == null) {
+            return selectedRange == SalesReportRange.ALL;
+        }
+
+        switch (selectedRange) {
+            case ALL:
+                return true;
+            case TODAY:
+                return saleDate.isEqual(today);
+            case LAST_7_DAYS:
+                LocalDate start = today.minusDays(LAST_DAYS_COUNT - 1L);
+                return !saleDate.isBefore(start) && !saleDate.isAfter(today);
+            case THIS_MONTH:
+                return saleDate.getYear() == today.getYear()
+                        && saleDate.getMonth() == today.getMonth();
+            case THIS_YEAR:
+                return saleDate.getYear() == today.getYear();
+            default:
+                return true;
+        }
+    }
+
+    private String truncate(String value, int maxLength) {
+        String safeValue = safe(value);
+        if (safeValue.length() <= maxLength) {
+            return safeValue;
+        }
+        return safeValue.substring(0, maxLength - 3) + "...";
     }
 
     private void showError(String text) {
