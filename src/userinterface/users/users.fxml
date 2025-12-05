@@ -1,36 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>   <!-- 👈 agrega esto -->
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="contentArea"
+            prefHeight="720"
+            prefWidth="1024"
+            stylesheets="@/resources/styles/inventory.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="userinterface.users.UsersController"
-            prefWidth="1024" prefHeight="720">
+            fx:controller="userinterface.users.UsersController">
 
-    <VBox spacing="16">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
+    <children>
+        <VBox spacing="16"
+              AnchorPane.topAnchor="16.0"
+              AnchorPane.bottomAnchor="16.0"
+              AnchorPane.leftAnchor="16.0"
+              AnchorPane.rightAnchor="16.0">
 
-        <Label text="Gestión de Usuarios" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <!-- Título -->
+            <Label text="Gestión de Usuarios"
+                   styleClass="inv-title"/>
 
-        <HBox spacing="8">
-            <TextField fx:id="txtBuscar" promptText="Buscar usuario..."/>
-            <Button text="Nuevo" fx:id="btnNuevo"/>
-            <Button text="Editar" fx:id="btnEditar"/>
-            <Button text="Eliminar" fx:id="btnEliminar"/>
-        </HBox>
+            <!-- Barra de búsqueda + acciones -->
+            <HBox spacing="12" styleClass="inv-toolbar">
+                <TextField fx:id="txtBuscar"
+                           promptText="Buscar por usuario, nombre o correo..."
+                           styleClass="inv-search-field"
+                           HBox.hgrow="ALWAYS"/>
 
-        <TableView fx:id="tblUsuarios" prefHeight="600">
-            <columns>
-                <TableColumn fx:id="colUsername" text="Usuario"/>
-                <TableColumn fx:id="colFullName" text="Nombre completo"/>
-                <TableColumn fx:id="colEmail" text="Correo"/>
-                <TableColumn fx:id="colRole" text="Rol"/>
-                <TableColumn fx:id="colActivo" text="Activo"/>
-                <TableColumn fx:id="colCreated" text="Creado"/>
-            </columns>
-        </TableView>
-    </VBox>
+                <Button fx:id="btnNuevo"
+                        text="Nuevo"
+                        styleClass="inv-primary-button"/>
+
+                <Button fx:id="btnEditar"
+                        text="Editar"
+                        styleClass="inv-primary-button"/>
+
+                <Button fx:id="btnEliminar"
+                        text="Eliminar"
+                        styleClass="inv-primary-button"/>
+            </HBox>
+
+            <!-- Card de tabla -->
+            <VBox styleClass="inv-table-card" VBox.vgrow="ALWAYS">
+                <TableView fx:id="tblUsuarios" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colUsername" text="Usuario"/>
+                        <TableColumn fx:id="colFullName" text="Nombre completo"/>
+                        <TableColumn fx:id="colEmail" text="Correo"/>
+                        <TableColumn fx:id="colRole" text="Rol"/>
+                        <TableColumn fx:id="colActivo" text="Activo"/>
+                        <TableColumn fx:id="colCreated" text="Creado"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </children>
 </AnchorPane>

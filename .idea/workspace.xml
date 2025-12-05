@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/DAO/SupplierDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/SupplierDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/purchase/PurchaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/purchase/PurchaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/purchase/PurchaseFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/purchase/PurchaseFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/sales/SalesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/suppliers/SupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/suppliers/SupplierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userinterface/suppliers/SupplierView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/suppliers/SupplierView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/users/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/users/users.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,40 +62,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GenerateHashes.executor": "Run",
-    "Application.Main.executor": "Run",
-    "JUnit.PasswordUtiitiesTest.executor": "Run",
-    "JUnit.PasswordUtilitiesTest.executor": "Run",
-    "JUnit.PasswordUtilitiesTest.sample.executor": "Run",
-    "JUnit.VehicleDAOTest.executor": "Run",
-    "JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor": "Run",
-    "Maven.Imperial-Motors [install].executor": "Run",
-    "Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/reino/OneDrive/Desktop/Seguridad/repoProyectoImperial/Imperial-Motors-Proyecto-Seguridad/src/test/java/userinterface/login",
-    "last_opened_file_path": "C:/Users/reino/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.33678162",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GenerateHashes.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUtiitiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUtilitiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUtilitiesTest.sample.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleDAOTest.getAllVehicles_WhenTableHasVehicles_ShouldReturnList.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Imperial-Motors [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/reino/OneDrive/Desktop/Seguridad/repoProyectoImperial/Imperial-Motors-Proyecto-Seguridad/src/test/java/userinterface/login&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/reino/OneDrive/Desktop/Pruebas/repoAngel/Proyecto-Principios-de-Construccion&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33678162&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\manit\Documents\Manuel programas Java\Imperial-Motors\src\userinterface\dashboard" />
