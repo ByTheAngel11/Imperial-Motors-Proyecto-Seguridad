@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="contentArea"
@@ -15,7 +16,7 @@
             stylesheets="@/resources/styles/inventory.css"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="userinterface.users.UsersController">
+            fx:controller="userinterface.audit.AuditController">
 
     <children>
         <VBox spacing="16"
@@ -24,42 +25,44 @@
               AnchorPane.leftAnchor="16.0"
               AnchorPane.rightAnchor="16.0">
 
-            <Label text="Gestión de Usuarios"
+            <Label fx:id="lblTitle"
+                   text="Auditoría del sistema"
                    styleClass="inv-title"/>
 
             <HBox spacing="12" styleClass="inv-toolbar">
                 <TextField fx:id="txtBuscar"
-                           promptText="Buscar por id, no. personal, usuario, nombre o correo..."
+                           promptText="Buscar por acción, entidad, usuario, ip, datos..."
                            styleClass="inv-search-field"
                            HBox.hgrow="ALWAYS"/>
 
-                <Button fx:id="btnNuevo"
-                        text="Nuevo"
+                <Button fx:id="btnVerAuditoria"
+                        text="Auditoría"
                         styleClass="inv-primary-button"/>
 
-                <Button fx:id="btnEditar"
-                        text="Editar"
-                        styleClass="inv-primary-button"/>
-
-                <Button fx:id="btnEliminar"
-                        text="Eliminar"
+                <Button fx:id="btnVerInventario"
+                        text="Inventario"
                         styleClass="inv-primary-button"/>
             </HBox>
 
             <VBox styleClass="inv-table-card" VBox.vgrow="ALWAYS">
-                <TableView fx:id="tblUsuarios" VBox.vgrow="ALWAYS">
+                <TableView fx:id="tblData" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colAccountId" text="ID"/>
-                        <TableColumn fx:id="colPersonnelNumber" text="No. personal"/>
-                        <TableColumn fx:id="colUsername" text="Usuario"/>
-                        <TableColumn fx:id="colFullName" text="Nombre completo"/>
-                        <TableColumn fx:id="colEmail" text="Correo"/>
-                        <TableColumn fx:id="colRole" text="Rol"/>
-                        <TableColumn fx:id="colActivo" text="Activo"/>
-                        <TableColumn fx:id="colCreated" text="Creado"/>
+                        <TableColumn fx:id="colId" text="ID"/>
+                        <TableColumn fx:id="colActor" text="Número de personal"/>
+                        <TableColumn fx:id="colAction" text="Acción realizada"/>
+                        <TableColumn fx:id="colEntity" text="Entidad"/>
+                        <TableColumn fx:id="colCreatedAt" text="Fecha"/>
+                        <TableColumn fx:id="colIp" text="IP"/>
+                        <TableColumn fx:id="colSummary" text="Resumen"/>
                     </columns>
                 </TableView>
             </VBox>
+
+            <HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblModeHint" text="" />
+            </HBox>
+
         </VBox>
     </children>
 </AnchorPane>

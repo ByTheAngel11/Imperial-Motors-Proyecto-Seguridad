@@ -13,36 +13,36 @@ public class InventoryMovementDTO {
     private Long accountId;
     private LocalDateTime createdAt;
 
-    public Long getMovementId() { return movementId; }
+    private String actorPersonnelNumber;
+    private String vehicleName;
 
+    public Long getMovementId() { return movementId; }
     public void setMovementId(Long movementId) { this.movementId = movementId; }
 
     public Long getVehicleId() { return vehicleId; }
-
     public void setVehicleId(Long vehicleId) { this.vehicleId = vehicleId; }
 
     public InventoryMovementType getType() { return type; }
-
     public void setType(InventoryMovementType type) { this.type = type; }
 
     public String getRefTable() { return refTable; }
-
     public void setRefTable(String refTable) { this.refTable = refTable; }
 
     public Long getRefId() { return refId; }
-
     public void setRefId(Long refId) { this.refId = refId; }
 
     public String getNote() { return note; }
-
     public void setNote(String note) { this.note = note; }
 
     public Long getAccountId() { return accountId; }
-
     public void setAccountId(Long accountId) { this.accountId = accountId; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
-
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-}
 
+    public String getActorPersonnelNumber() { return actorPersonnelNumber; }
+    public void setActorPersonnelNumber(String actorPersonnelNumber) { this.actorPersonnelNumber = actorPersonnelNumber; }
+
+    public String getVehicleName() { return vehicleName; }
+    public void setVehicleName(String vehicleName) { this.vehicleName = vehicleName; }
+}

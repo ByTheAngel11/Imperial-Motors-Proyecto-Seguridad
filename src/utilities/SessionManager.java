@@ -4,7 +4,6 @@ import logic.DTO.AccountRole;
 
 public final class SessionManager {
 
-
     private static Long currentAccountId;
     private static AccountRole currentRole;
     private static Boolean currentIsActive;
@@ -42,5 +41,11 @@ public final class SessionManager {
 
     public static boolean isAdmin() {
         return currentRole != null && currentRole == AccountRole.ADMINISTRATOR;
+    }
+
+    public static void logout() {
+        currentAccountId = null;
+        currentRole = null;
+        currentIsActive = null;
     }
 }

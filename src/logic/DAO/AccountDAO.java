@@ -13,91 +13,79 @@ import java.util.List;
 public class AccountDAO {
 
     private static final String SQL_INSERT =
-            "INSERT INTO account (email, password_hash, role, is_active, created_at, updated_at, deleted_at) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-    private static final String SQL_UPDATE =
-            "UPDATE account SET email = ?, password_hash = ?, role = ?, is_active = ?, " +
-                    "created_at = ?, updated_at = ?, deleted_at = ? WHERE account_id = ?";
-
-    private static final String SQL_DELETE =
-            "DELETE FROM account WHERE account_id = ?";
+            "INSERT INTO account (email, password_hash, role, is_active) VALUES (?, ?, ?, ?)";
 
     private static final String SQL_SELECT_BY_ID =
-            "SELECT * FROM account WHERE account_id = ?";
-
-    private static final String SQL_SELECT_ALL =
-            "SELECT * FROM account";
+            "SELECT account_id, email, password_hash, role, is_active, created_at, updated_at, deleted_at " +
+                    "FROM account WHERE account_id = ?";
 
     private static final String SQL_SELECT_BY_EMAIL =
-            "SELECT * FROM account WHERE email = ? AND deleted_at IS NULL";
+            "SELECT account_id, email, password_hash, role, is_active, created_at, updated_at, deleted_at " +
+                    "FROM account WHERE email = ?";
 
-    public boolean insertAccount(AccountDTO account) throws SQLException, IOException {
-        try (Connection connection = ConnectionDataBase.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+    private static final String SQL_SELECT_ALL =
+            "SELECT account_id, email, password_hash, role, is_active, created_at, updated_at, deleted_at " +
+                    "FROM account";
+
+    private static final String SQL_UPDATE_CORE =
+            "UPDATE account SET email = ?, role = ?, is_active = ?, updated_at = ? WHERE account_id = ?";
+
+    private static final String SQL_UPDATE_PASSWORD =
+            "UPDATE account SET password_hash = ?, updated_at = ? WHERE account_id = ?";
+
+    private static final String SQL_LOGICAL_DELETE =
+            "UPDATE account SET is_active = 0, updated_at = ?, deleted_at = ? WHERE account_id = ?";
+
+    public long insertAccount(Connection connection, AccountDTO account) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, account.getEmail());
             statement.setString(2, account.getPasswordHash());
-            statement.setString(3, account.getRole().name().toLowerCase());
+            statement.setString(3, normalizeRoleForDb(account.getRole()));
             statement.setBoolean(4, account.getIsActive());
-            statement.setObject(5, account.getCreatedAt());
-            statement.setObject(6, account.getUpdatedAt());
-            statement.setObject(7, account.getDeletedAt());
 
-            boolean result = statement.executeUpdate() > 0;
-
-            try (ResultSet keys = statement.getGeneratedKeys()) {
-                if (keys.next()) {
-                    account.setAccountId(keys.getLong(1));
-                }
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating account failed, no rows affected.");
             }
 
-            return result;
+            try (ResultSet keys = statement.getGeneratedKeys()) {
+                if (!keys.next()) {
+                    throw new SQLException("Creating account failed, no ID obtained.");
+                }
+                long id = keys.getLong(1);
+                account.setAccountId(id);
+                return id;
+            }
         }
     }
 
-    public boolean updateAccount(AccountDTO account) throws SQLException, IOException {
-        try (Connection connection = ConnectionDataBase.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_UPDATE)) {
-
-            statement.setString(1, account.getEmail());
-            statement.setString(2, account.getPasswordHash());
-            statement.setString(3, account.getRole().name().toLowerCase());
-            statement.setBoolean(4, account.getIsActive());
-            statement.setObject(5, account.getCreatedAt());
-            statement.setObject(6, account.getUpdatedAt());
-            statement.setObject(7, account.getDeletedAt());
-            statement.setLong(8, account.getAccountId());
-
-            return statement.executeUpdate() > 0;
-        }
-    }
-
-    public boolean deleteAccount(Long accountId) throws SQLException, IOException {
-        try (Connection connection = ConnectionDataBase.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_DELETE)) {
-
-            statement.setLong(1, accountId);
-            return statement.executeUpdate() > 0;
-        }
-    }
-
-    public AccountDTO findAccountById(Long accountId) throws SQLException, IOException {
-        AccountDTO account = null;
-
+    public AccountDTO findAccountById(long accountId) throws SQLException, IOException {
         try (Connection connection = ConnectionDataBase.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_ID)) {
 
             statement.setLong(1, accountId);
-
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    account = mapResultSetToAccountDTO(rs);
+                    return map(rs);
                 }
             }
         }
+        return null;
+    }
 
-        return account;
+    public AccountDTO findAccountByEmail(String email) throws SQLException, IOException {
+        try (Connection connection = ConnectionDataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_EMAIL)) {
+
+            statement.setString(1, email);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return map(rs);
+                }
+            }
+        }
+        return null;
     }
 
     public List<AccountDTO> getAllAccounts() throws SQLException, IOException {
@@ -108,43 +96,76 @@ public class AccountDAO {
              ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                accounts.add(mapResultSetToAccountDTO(rs));
+                accounts.add(map(rs));
             }
         }
-
         return accounts;
     }
 
-    public AccountDTO findAccountByEmail(String email) throws SQLException, IOException {
-        AccountDTO account = null;
+    public void updateAccountCore(Connection connection, AccountDTO account) throws SQLException {
+        LocalDateTime now = LocalDateTime.now();
 
-        try (Connection connection = ConnectionDataBase.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_EMAIL)) {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_CORE)) {
+            statement.setString(1, account.getEmail());
+            statement.setString(2, normalizeRoleForDb(account.getRole()));
+            statement.setBoolean(3, account.getIsActive());
+            statement.setObject(4, now);
+            statement.setLong(5, account.getAccountId());
 
-            statement.setString(1, email);
-
-            try (ResultSet rs = statement.executeQuery()) {
-                if (rs.next()) {
-                    account = mapResultSetToAccountDTO(rs);
-                }
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating account failed, no rows affected.");
             }
         }
-
-        return account;
     }
 
-    private AccountDTO mapResultSetToAccountDTO(ResultSet rs) throws SQLException {
-        AccountDTO account = new AccountDTO();
+    public void updateAccountPassword(Connection connection, long accountId, String newHash) throws SQLException {
+        LocalDateTime now = LocalDateTime.now();
 
-        account.setAccountId(rs.getLong("account_id"));
-        account.setEmail(rs.getString("email"));
-        account.setPasswordHash(rs.getString("password_hash"));
-        account.setRole(AccountRole.valueOf(rs.getString("role").toUpperCase()));
-        account.setIsActive(rs.getBoolean("is_active"));
-        account.setCreatedAt(rs.getObject("created_at", LocalDateTime.class));
-        account.setUpdatedAt(rs.getObject("updated_at", LocalDateTime.class));
-        account.setDeletedAt(rs.getObject("deleted_at", LocalDateTime.class));
+        try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_PASSWORD)) {
+            statement.setString(1, newHash);
+            statement.setObject(2, now);
+            statement.setLong(3, accountId);
+            statement.executeUpdate();
+        }
+    }
 
-        return account;
+    public void logicalDeleteAccount(Connection connection, long accountId) throws SQLException {
+        LocalDateTime now = LocalDateTime.now();
+
+        try (PreparedStatement statement = connection.prepareStatement(SQL_LOGICAL_DELETE)) {
+            statement.setObject(1, now);
+            statement.setObject(2, now);
+            statement.setLong(3, accountId);
+
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Logical delete account failed, no rows affected.");
+            }
+        }
+    }
+
+    private String normalizeRoleForDb(AccountRole role) {
+        if (role == null) {
+            return "employee";
+        }
+        String n = role.name();
+        if ("ADMIN".equals(n) || "ADMINISTRATOR".equals(n) || "ADMINISTRADOR".equals(n)) {
+            return "administrator";
+        }
+        return "employee";
+    }
+
+    private AccountDTO map(ResultSet rs) throws SQLException {
+        AccountDTO a = new AccountDTO();
+        a.setAccountId(rs.getLong("account_id"));
+        a.setEmail(rs.getString("email"));
+        a.setPasswordHash(rs.getString("password_hash"));
+        a.setRole(AccountRole.valueOf(rs.getString("role").toUpperCase()));
+        a.setIsActive(rs.getBoolean("is_active"));
+        a.setCreatedAt(rs.getObject("created_at", LocalDateTime.class));
+        a.setUpdatedAt(rs.getObject("updated_at", LocalDateTime.class));
+        a.setDeletedAt(rs.getObject("deleted_at", LocalDateTime.class));
+        return a;
     }
 }

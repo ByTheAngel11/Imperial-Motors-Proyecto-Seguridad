@@ -6,7 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="a70b80bd-c1ea-406e-9684-1e2c49ff8914" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/AuditLogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/AuditLogDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DTO/AccountDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DTO/AccountDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DTO/AuditAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DTO/AuditAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/DTO/InventoryMovementDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/DTO/InventoryMovementDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/costumers/CustomersView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/costumers/CustomersView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/dashboard/DashboardView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/users/UserTableRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/users/UserTableRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userinterface/users/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/users/UsersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userinterface/users/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/userinterface/users/users.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/SessionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +31,8 @@
         <option value="module-info" />
         <option value="JavaFXApplication" />
         <option value="Enum" />
-        <option value="FxmlFile" />
         <option value="JUnit5 Test Class" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>

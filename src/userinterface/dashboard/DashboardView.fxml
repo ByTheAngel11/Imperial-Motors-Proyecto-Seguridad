@@ -10,40 +10,24 @@
             prefWidth="1280" prefHeight="800"
             stylesheets="@/resources/styles/dashboard.css">
 
-    <!-- ============ SIDEBAR IZQUIERDO ============ -->
     <left>
-        <VBox prefWidth="240"
-              styleClass="sidebar">
+        <VBox prefWidth="240" styleClass="sidebar">
 
-            <!-- Logo / Encabezado -->
-            <VBox spacing="8"
-                  alignment="CENTER_LEFT"
-                  styleClass="sidebar-header">
+            <VBox spacing="8" alignment="CENTER_LEFT" styleClass="sidebar-header">
                 <padding>
                     <Insets top="16" right="16" bottom="16" left="16"/>
                 </padding>
 
-                <Label text="Imperial Motors"
-                       styleClass="sidebar-title"/>
-                <Label text="Sistema de Gestión"
-                       styleClass="sidebar-subtitle"/>
+                <Label text="Imperial Motors" styleClass="sidebar-title"/>
+                <Label text="Sistema de Gestión" styleClass="sidebar-subtitle"/>
             </VBox>
 
             <Separator/>
 
-            <!-- Navegación -->
-            <VBox spacing="4"
-                  styleClass="nav-container">
+            <VBox spacing="4" styleClass="nav-container">
                 <padding>
                     <Insets top="8" right="8" bottom="8" left="8"/>
                 </padding>
-
-                <Button fx:id="btnDashboard"
-                        text="Dashboard"
-                        onAction="#onReports"
-                        styleClass="nav-item"
-                        maxWidth="Infinity"
-                        alignment="CENTER_LEFT"/>
 
                 <Button fx:id="btnUsuarios"
                         text="Usuarios"
@@ -72,12 +56,14 @@
                         styleClass="nav-item"
                         maxWidth="Infinity"
                         alignment="CENTER_LEFT"/>
+
                 <Button fx:id="btnCompras"
                         text="Compras"
                         onAction="#onPurchases"
                         styleClass="nav-item"
                         maxWidth="Infinity"
                         alignment="CENTER_LEFT"/>
+
                 <Button fx:id="btnProveedores"
                         text="Proveedores"
                         onAction="#onProviders"
@@ -85,29 +71,14 @@
                         maxWidth="Infinity"
                         alignment="CENTER_LEFT"/>
 
-                <Button fx:id="btnReportes"
-                        text="Reportes"
-                        onAction="#onReports"
+                <Button fx:id="btnAuditoria"
+                        text="Auditoría"
+                        onAction="#onAudit"
                         styleClass="nav-item"
                         maxWidth="Infinity"
                         alignment="CENTER_LEFT"/>
 
-                <Separator/>
-
-                <Button fx:id="btnConfiguracion"
-                        text="Configuración"
-                        onAction="#onConfiguration"
-                        styleClass="nav-item"
-                        maxWidth="Infinity"
-                        alignment="CENTER_LEFT"/>
-
-                <Button fx:id="btnAcercaDe"
-                        text="Acerca de"
-                        onAction="#onAbout"
-                        styleClass="nav-item"
-                        maxWidth="Infinity"
-                        alignment="CENTER_LEFT"/>
-
+                <!-- Empuja el botón de cerrar sesión al fondo -->
                 <Pane VBox.vgrow="ALWAYS"/>
 
                 <Button fx:id="btnCerrarSesion"
@@ -119,7 +90,6 @@
         </VBox>
     </left>
 
-    <!-- ============ BARRA SUPERIOR ============ -->
     <top>
         <BorderPane styleClass="topbar">
             <left>
@@ -129,19 +99,15 @@
                     </padding>
                     <Label text="☰" styleClass="topbar-menu-icon"/>
                     <VBox spacing="2">
-                        <Label text="Admin Usuario"
-                               styleClass="topbar-username"/>
-                        <Label text="Administrador"
-                               styleClass="topbar-role"/>
+                        <Label text="Admin Usuario" styleClass="topbar-username"/>
+                        <Label text="Administrador" styleClass="topbar-role"/>
                     </VBox>
                 </HBox>
             </left>
         </BorderPane>
     </top>
 
-    <!-- ============ ÁREA CENTRAL ============ -->
     <center>
-        <!-- Aquí cargaremos dinámicamente las vistas (usuarios, clientes, etc.) -->
         <AnchorPane fx:id="contentArea"
                     style="-fx-background-color: #F3F4F6;"
                     prefWidth="1040" prefHeight="800"/>

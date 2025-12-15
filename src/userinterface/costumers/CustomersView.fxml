@@ -18,7 +18,6 @@
               AnchorPane.leftAnchor="32.0"
               AnchorPane.rightAnchor="32.0">
 
-            <!-- Título + botón agregar -->
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <Label text="Clientes"
                        styleClass="inv-title"/>
@@ -31,7 +30,6 @@
                         styleClass="inv-primary-button"/>
             </HBox>
 
-            <!-- Barra de búsqueda tipo inventario -->
             <HBox spacing="12" alignment="CENTER_LEFT">
                 <TextField fx:id="TxtSearchEmail"
                            promptText="Buscar por nombre, correo o teléfono..."
@@ -44,146 +42,102 @@
                           styleClass="inv-filter"/>
             </HBox>
 
-            <!-- Card grande: tabla + detalles -->
             <BorderPane prefHeight="0"
                         prefWidth="0"
-                        styleClass="inv-table-card">
+                        styleClass="inv-table-card"
+                        VBox.vgrow="ALWAYS">
 
-                <!-- Tabla de clientes -->
                 <center>
                     <TableView fx:id="TblCustomers">
                         <columns>
-                            <TableColumn fx:id="ColNumber"
-                                         text="ID"
-                                         prefWidth="90"/>
-                            <TableColumn fx:id="ColName"
-                                         text="Nombre completo"
-                                         prefWidth="260"/>
-                            <TableColumn fx:id="ColEmail"
-                                         text="Correo"
-                                         prefWidth="260"/>
-                            <TableColumn fx:id="ColPhone"
-                                         text="Teléfono"
-                                         prefWidth="160"/>
+                            <TableColumn fx:id="ColNumber" text="ID" prefWidth="90"/>
+                            <TableColumn fx:id="ColName" text="Nombre completo" prefWidth="260"/>
+                            <TableColumn fx:id="ColEmail" text="Correo" prefWidth="260"/>
+                            <TableColumn fx:id="ColPhone" text="Teléfono" prefWidth="160"/>
                         </columns>
                     </TableView>
                 </center>
 
-                <!-- Panel de detalles tipo formulario -->
                 <right>
-                    <VBox spacing="20"
-                          prefWidth="420"
-                          alignment="TOP_LEFT">
+                    <ScrollPane fitToWidth="true"
+                                fitToHeight="true"
+                                hbarPolicy="NEVER"
+                                vbarPolicy="AS_NEEDED">
 
-                        <padding>
-                            <Insets top="24" right="24" bottom="24" left="24"/>
-                        </padding>
+                        <content>
+                            <VBox spacing="20"
+                                  prefWidth="420"
+                                  alignment="TOP_LEFT">
 
-                        <Label text="Detalles del cliente"
-                               styleClass="inv-title"/>
+                                <padding>
+                                    <Insets top="24" right="24" bottom="48" left="24"/>
+                                </padding>
 
-                        <Separator/>
+                                <Label text="Detalles del cliente"
+                                       styleClass="inv-title"/>
 
-                        <!-- Grid estilo formulario (labels + “cajas” de texto) -->
-                        <GridPane hgap="24" vgap="18">
-                            <columnConstraints>
-                                <ColumnConstraints minWidth="110" halignment="LEFT"/>
-                                <ColumnConstraints hgrow="ALWAYS"/>
-                            </columnConstraints>
+                                <Separator/>
 
-                            <!-- No. cliente -->
-                            <Label text="No. cliente"
-                                   GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <GridPane hgap="24" vgap="18">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="110" halignment="LEFT"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
 
-                            <StackPane GridPane.rowIndex="0" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblNumber"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-detail-value"/>
-                            </StackPane>
+                                    <Label text="No. cliente" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblNumber" maxWidth="Infinity" styleClass="inv-detail-value"/>
+                                    </StackPane>
 
-                            <!-- Nombre -->
-                            <Label text="Nombre"
-                                   GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <Label text="Nombre" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblName" maxWidth="Infinity" styleClass="inv-detail-value"/>
+                                    </StackPane>
 
-                            <StackPane GridPane.rowIndex="1" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblName"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-detail-value"/>
-                            </StackPane>
+                                    <Label text="Correo" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblEmail" maxWidth="Infinity" styleClass="inv-detail-value"/>
+                                    </StackPane>
 
-                            <!-- Correo -->
-                            <Label text="Correo"
-                                   GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <Label text="Teléfono" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblPhone" maxWidth="Infinity" styleClass="inv-detail-value"/>
+                                    </StackPane>
 
-                            <StackPane GridPane.rowIndex="2" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblEmail"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-detail-value"/>
-                            </StackPane>
+                                    <Label text="Estado" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblStatus" maxWidth="Infinity" styleClass="inv-status-pill"/>
+                                    </StackPane>
 
-                            <!-- Teléfono -->
-                            <Label text="Teléfono"
-                                   GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <Label text="Creado" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblCreatedAt" maxWidth="Infinity" styleClass="inv-detail-value"/>
+                                    </StackPane>
 
-                            <StackPane GridPane.rowIndex="3" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblPhone"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-detail-value"/>
-                            </StackPane>
+                                    <Label text="Actualizado" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                    <StackPane GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="inv-search-field">
+                                        <Label fx:id="LblUpdatedAt" maxWidth="Infinity" styleClass="inv-detail-value"/>
+                                    </StackPane>
+                                </GridPane>
 
-                            <!-- Estado -->
-                            <Label text="Estado"
-                                   GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <!-- ✅ Botón Editar más ancho (evita que se corte el texto) -->
+                                <HBox spacing="8" alignment="CENTER_RIGHT">
+                                    <Button fx:id="BtnEditCustomer"
+                                            text="Editar"
+                                            onAction="#onEditCustomer"
+                                            styleClass="inv-action-button"
+                                            minWidth="92"/>
 
-                            <StackPane GridPane.rowIndex="4" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblStatus"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-status-pill"/>
-                            </StackPane>
-
-                            <!-- Creado -->
-                            <Label text="Creado"
-                                   GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-
-                            <StackPane GridPane.rowIndex="5" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblCreatedAt"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-detail-value"/>
-                            </StackPane>
-
-                            <!-- Actualizado -->
-                            <Label text="Actualizado"
-                                   GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-
-                            <StackPane GridPane.rowIndex="6" GridPane.columnIndex="1"
-                                       styleClass="inv-search-field">
-                                <Label fx:id="LblUpdatedAt"
-                                       maxWidth="Infinity"
-                                       styleClass="inv-detail-value"/>
-                            </StackPane>
-                        </GridPane>
-
-                        <!-- Botones abajo a la derecha -->
-                        <HBox spacing="8" alignment="CENTER_RIGHT">
-                            <Button fx:id="BtnEditCustomer"
-                                    text="Editar"
-                                    onAction="#onEditCustomer"
-                                    styleClass="inv-action-button"/>
-                            <Button fx:id="BtnDeleteCustomer"
-                                    text="Eliminar"
-                                    onAction="#onDeleteCustomer"
-                                    styleClass="inv-action-button action-delete"/>
-                        </HBox>
-                    </VBox>
+                                    <Button fx:id="BtnDeleteCustomer"
+                                            text="Eliminar"
+                                            onAction="#onDeleteCustomer"
+                                            styleClass="inv-action-button action-delete"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </ScrollPane>
                 </right>
 
-                <!-- Margen interno de la card -->
                 <BorderPane.margin>
                     <Insets top="8" right="8" bottom="8" left="8"/>
                 </BorderPane.margin>

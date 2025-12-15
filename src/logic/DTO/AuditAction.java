@@ -7,7 +7,5 @@ public enum AuditAction {
     DELETE,
     LOGIN,
     LOGOUT,
-    ANULACION,
-    CONFIG
 }
 
